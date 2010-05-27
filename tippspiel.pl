@@ -34,7 +34,7 @@ my @TDC = qw(ID TYPE DATE CLOCK PLACE FIRST SECOND FIRST_SCORE SECOND_SCORE);
 
 # Interpret PD_Table
 my @GDC = qw(ID FIRST SECOND FIRST_SCORE SECOND_SCORE);
-my %GD = map { $GDC[$_] => $_ } 0 .. $#GDC;
+#my %GD = map { $GDC[$_] => $_ } 0 .. $#GDC;
 
 # Long names for rounds
 my %longname = (
@@ -277,29 +277,29 @@ sub PrintRoundData {
                     {
                         # kein korrekter Tipp
                         $OUTPUT .= "<td><span> \
-                            <font style=\"color:#FF0000\">".$GamerData_Table[$MatchID][$GD{FIRST_SCORE}]."</font> : \
-                            <font style=\"color:#FF0000\">".$GamerData_Table[$MatchID][$GD{SECOND_SCORE}]."</font></span></td>";
+                            <font style=\"color:#FF0000\">".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
+                            <font style=\"color:#FF0000\">".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
                     }
                     elsif ( compareTipAndResult($MatchID) == 1 )
                     {
                         # Tendenz richtig
                         $OUTPUT .= "<td><span> \
-                            <font style=\"color:orange\">".$GamerData_Table[$MatchID][$GD{FIRST_SCORE}]."</font> : \
-                            <font style=\"color:orange\">".$GamerData_Table[$MatchID][$GD{SECOND_SCORE}]."</font></span></td>";
+                            <font style=\"color:orange\">".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
+                            <font style=\"color:orange\">".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
                     }
                     elsif ( compareTipAndResult($MatchID) == 3 )
                     {
                         # richtiger Tipp
                         $OUTPUT .= "<td><span> \
-                            <font style=\"color:green\">".$GamerData_Table[$MatchID][$GD{FIRST_SCORE}]."</font> : \
-                            <font style=\"color:green\">".$GamerData_Table[$MatchID][$GD{SECOND_SCORE}]."</font></span></td>";
+                            <font style=\"color:green\">".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
+                            <font style=\"color:green\">".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
                     }
                     else
                     {
                         if ( isGamerDataAvailable($MatchID) ) {
                             $OUTPUT .= "<td><span> \
-                                <font>".$GamerData_Table[$MatchID][$GD{FIRST_SCORE}]."</font> : \
-                                <font>".$GamerData_Table[$MatchID][$GD{SECOND_SCORE}]."</font></span></td>";
+                                <font>".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
+                                <font>".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
                         }
                         else {
                             $OUTPUT .= "<td></td>";
@@ -443,8 +443,8 @@ sub PrintRoundTipp {
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
                 <td> \
-                <span>".$GamerData_Table[$MatchID][$GD{FIRST}] ."</span> - <span>". $GamerData_Table[$MatchID][$GD{SECOND}] ."</span></td> \
-                <td><span>".$GamerData_Table[$MatchID][$GD{FIRST_SCORE}] ."</span> : <span>". $GamerData_Table[$MatchID][$GD{SECOND_SCORE}] ."</span></td> \
+                <span>".$GamerData_Table[$MatchID]{FIRST} ."</span> - <span>". $GamerData_Table[$MatchID]{SECOND} ."</span></td> \
+                <td><span>".$GamerData_Table[$MatchID]{FIRST_SCORE} ."</span> : <span>". $GamerData_Table[$MatchID]{SECOND_SCORE} ."</span></td> \
                 </tr>";
                 $RowColor = ($RowColor+1)%2;
         }
@@ -527,7 +527,7 @@ sub extractGamersData {
     foreach(@Lines) {
         @DataSet = split(/;/,$_);
         foreach(@DataSet) {
-            $GamerData_Table[$i][$j] = $_;
+            $GamerData_Table[$i]{$GDC[$j]} = $_;
             $j++;
         }
         $i++;
@@ -555,7 +555,7 @@ sub extractGamerPoints {
     foreach(@Lines) {
         @DataSet = split(/;/,$_);
         foreach(@DataSet) {
-            $GamerData_Table[$i][$j] = $_;
+            $GamerData_Table[$i]{$GDC[$j]} = $_;
             $j++;
         }
         $i++;
@@ -612,13 +612,13 @@ sub compareSetTeams {
     my $MatchID = shift;
 
     if ( isDataAvailable($MatchID) and isGamerDataAvailable($MatchID) ) {
-        if ( isGamersTeamTipCorrect($MatchID, 'FIRST', $GD{FIRST}) and
-            isGamersTeamTipCorrect($MatchID, 'SECOND', $GD{SECOND}) ) {
+        if ( isGamersTeamTipCorrect($MatchID, 'FIRST', 'FIRST') and
+            isGamersTeamTipCorrect($MatchID, 'SECOND', 'SECOND') ) {
             # Wenn der Spieler beide Teams richtig gesetzt hat, gibt es zwei Punkte
             return 2;
         }
-        elsif ( isGamersTeamTipCorrect($MatchID, 'FIRST', $GD{FIRST}) or
-                isGamersTeamTipCorrect($MatchID, 'SECOND', $GD{SECOND}) ) {
+        elsif ( isGamersTeamTipCorrect($MatchID, 'FIRST', 'FIRST') or
+                isGamersTeamTipCorrect($MatchID, 'SECOND', 'SECOND') ) {
             # Wenn der Spieler ein Team richtig gesetzt hat, gibt es einen Punkt
             return 1;
         }
@@ -672,12 +672,8 @@ sub isDataAvailable {
 }
 
 sub isGamerDataAvailable {
-        #($GamerData_Table[$_[0]][$GD{FIRST}] eq $NO_DATA
-    #or (
-        $GamerData_Table[$_[0]][$GD{FIRST_SCORE}] eq $NO_DATA
-    #and
-        # $GamerData_Table[$_[0]][$GD{SECOND_SCORE}] eq $NO_DATA) )
-         ? return 0 : return 1;
+        $GamerData_Table[$_[0]]{FIRST_SCORE} ne $NO_DATA
+         ? return 1 : return 0;
 }
 
 # Überprüft, ob keine Daten fuer Argument 0 vorliegen
@@ -699,7 +695,7 @@ sub isNoDataOverallAvailable {
 # Return: 0, wenn nein ; 1, wenn ja
 # Aufruf: isGamersTeamTipCorrect($MatchID,$TD_FIRST,$PD_FIRST);
 sub isGamersTeamTipCorrect {
-    $TD_Table[$_[0]]{$_[1]} eq $GamerData_Table[$_[0]][$_[2]] ? return 1 : return 0;
+    $TD_Table[$_[0]]{$_[1]} eq $GamerData_Table[$_[0]]{$_[2]} ? return 1 : return 0;
 }
 
 # Überprueft, ob der Spieltyp von Argument 0 gleich Argument 1 ist.
@@ -722,16 +718,16 @@ sub isGamer {
 # Argument: $_[0]: Match-ID
 # Return: 1, wenn korrekt ; 0; wenn nicht korrekt
 sub isTippCorrect {
-        $GamerData_Table[$_[0]][$GD{FIRST_SCORE}] == $TD_Table[$_[0]]{FIRST_SCORE}
+        $GamerData_Table[$_[0]]{FIRST_SCORE} == $TD_Table[$_[0]]{FIRST_SCORE}
     and
-        $GamerData_Table[$_[0]][$GD{SECOND_SCORE}] == $TD_Table[$_[0]]{SECOND_SCORE} ? return 1 : return 0;
+        $GamerData_Table[$_[0]]{SECOND_SCORE} == $TD_Table[$_[0]]{SECOND_SCORE} ? return 1 : return 0;
 }
 
 # Überprüft, ob der Gewinner korrekt getippt wurde
 # Argument: $_[0]: Match-ID
 # Return: 1, wenn korrekt ; 0; wenn nicht korrekt
 sub isWinnerTippCorrect {
-        MatchWinner($GamerData_Table[$_[0]][$GD{FIRST_SCORE}],$GamerData_Table[$_[0]][$GD{SECOND_SCORE}])
+        MatchWinner($GamerData_Table[$_[0]]{FIRST_SCORE},$GamerData_Table[$_[0]]{SECOND_SCORE})
     eq
         MatchWinner($TD_Table[$_[0]]{FIRST_SCORE},$TD_Table[$_[0]]{SECOND_SCORE}) ? return 1 : return 0;
 }
