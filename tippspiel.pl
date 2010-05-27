@@ -517,7 +517,8 @@ sub extractGamersData {
     my $j = 0;
 
     # Read data of $Gamer
-    open(file_Player, "<$GameData/players/$Gamer") || die "$_[0] not found.";
+    my $file = "$GameData/players/$Gamer";
+    open(file_Player, "<", $file) || die "$file not found.";
     my @Lines = <file_Player>;
     close(file_Player);
 
