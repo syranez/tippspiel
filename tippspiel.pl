@@ -2,7 +2,7 @@
 
 use strict;
 use warnings;
-#use Data::Dumper; #debug
+use Data::Dumper; #debug
 
 #use CGI::Carp qw(fatalsToBrowser);
 
@@ -35,6 +35,16 @@ my %TD = map { $TDC[$_] => $_ } 0 .. $#TDC;
 # Interpret PD_Table
 my @GDC = qw(ID FIRST SECOND FIRST_SCORE SECOND_SCORE);
 my %GD = map { $GDC[$_] => $_ } 0 .. $#GDC;
+
+# Long names for rounds
+my %longname = (
+    (map { ("Group$_" => "Gruppe $_") } "A" .. "Z"),
+    "AF*" => "Achtelfinale",
+    "VF*" => "Viertelfinale",
+    "HF*" => "Halbfinale",
+    "P3" => "Spiel um Platz 3",
+    "FINAL" => "Finale"
+    );
 
 # No data available yet
 my $NO_DATA = "-";
@@ -98,49 +108,20 @@ sub PrintDocument {
         $PlayersSetCount = 48;
         $GameName = "Weltmeisterschaft 2006";
         $OUTPUT .=
-            PrintRound("Gruppe A", "GroupA")
-            . PrintRound("Gruppe B", "GroupB")
-            . PrintRound("Gruppe C", "GroupC")
-            . PrintRound("Gruppe D", "GroupD")
-            . PrintRound("Gruppe E", "GroupE")
-            . PrintRound("Gruppe F", "GroupF")
-            . PrintRound("Gruppe G", "GroupG")
-            . PrintRound("Gruppe H", "GroupH")
-            . PrintRound("Achtelfinale", "AF*")
-            . PrintRound("Viertelfinale", "VF*")
-            . PrintRound("Halbfinale", "HF*")
-            . PrintRound("Spiel um Platz 3", "P3")
-            . PrintRound("Finale", "FINAL");
+            PrintRounds("GroupA", "GroupB", "GroupC", "GroupD", "GroupE", "GroupG", "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
     }
     elsif ( $_[0] eq "wm2010" ) {
         $PlayersSetCount = 48;
         $GameName = "Weltmeisterschaft 2010";
         $OUTPUT .=
-            PrintRound("Gruppe A", "GroupA")
-            . PrintRound("Gruppe B", "GroupB")
-            . PrintRound("Gruppe C", "GroupC")
-            . PrintRound("Gruppe D", "GroupD")
-            . PrintRound("Gruppe E", "GroupE")
-            . PrintRound("Gruppe F", "GroupF")
-            . PrintRound("Gruppe G", "GroupG")
-            . PrintRound("Gruppe H", "GroupH")
-            . PrintRound("Achtelfinale", "AF*")
-            . PrintRound("Viertelfinale", "VF*")
-            . PrintRound("Halbfinale", "HF*")
-            . PrintRound("Spiel um Platz 3", "P3")
-            . PrintRound("Finale", "FINAL");
+            PrintRounds("GroupA", "GroupB", "GroupC", "GroupD", "GroupE", "GroupG", "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
+
     }
     elsif ( $_[0] eq "em2008" ) {
         $PlayersSetCount = 24;
         $GameName = "Europameisterschaft 2008";
         $OUTPUT .=
-            PrintRound("Gruppe A", "GroupA")
-            . PrintRound("Gruppe B", "GroupB")
-            . PrintRound("Gruppe C", "GroupC")
-            . PrintRound("Gruppe D", "GroupD")
-            . PrintRound("Viertelfinale", "VF*")
-            . PrintRound("Halbfinale", "HF*")
-            . PrintRound("Finale", "FINAL");
+            PrintRounds("GroupA", "GroupB", "GroupC", "GroupD", "VF*", "HF*", "FINAL");
     }
 
     return PrintHTMLHeader().PrintHTMLTop().PrintGamerTable().$OUTPUT."</body></html>\n";
@@ -213,12 +194,16 @@ sub PrintGamerTable {
     return $OUTPUT."</table></div>".PrintFreeSpace();
 }
 
+sub PrintRounds(@) {
+    return join "", map { PrintRound($_) } @_;
+}
+
 # Schreibt den HTML-Quelltext fuer eine Runde des Turniers
 # Argumente: 0: Rundenname ; 1: Runden-ID
 # Return: HTML-String
-sub PrintRound {
-    my $RoundName = shift;
-    my $RoundID = shift;
+sub PrintRound($) {
+    my ($RoundID) = @_;
+    my $RoundName = $longname{$RoundID};
 
     my $OUTPUT =
         "<div align=\"center\"> \
