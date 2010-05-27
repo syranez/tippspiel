@@ -1,0 +1,64 @@
+1;GroupA;09.06.2006;18:00;München;Deutschland;Costa Rica;4;2
+2;GroupA;09.06.2006;21:00;Gelsenkirchen;Polen;Ecuador;0;2
+3;GroupB;10.06.2006;15:00;Frankfurt;England;Paraguay;1;0
+4;GroupB;10.06.2006;18:00;Dortmund;Trinidad und Tobago;Schweden;0;0
+5;GroupC;10.06.2006;21:00;Hamburg;Argentinien;Elfenbeinküste;2;1
+6;GroupC;11.06.2006;15:00;Leipzig;Serbien und Montenegro;Niederlande;0;1
+7;GroupD;11.06.2006;18:00;Nürnberg;Mexiko;Iran;3;1
+8;GroupD;11.06.2006;21:00;Köln;Angola;Portugal;0;1
+9;GroupF;12.06.2006;15:00;Kaiserslautern;Australien;Japan;3;1
+10;GroupE;12.06.2006;18:00;Gelsenkirchen;USA;Tschechien;0;3
+11;GroupE;12.06.2006;21:00;Hannover;Italien;Ghana;2;0
+12;GroupG;13.06.2006;15:00;Frankfurt;Südkorea;Togo;2;1
+13;GroupG;13.06.2006;18:00;Stuttgart;Frankreich;Schweiz;0;0
+14;GroupF;13.06.2006;21:00;Berlin;Brasilien;Kroatien;1;0
+15;GroupH;14.06.2006;15:00;Leipzig;Spanien;Ukraine;4;0
+16;GroupH;14.06.2006;18:00;München;Tunesien;Saudi-Arabien;2;2
+17;GroupA;14.06.2006;21:00;Dortmund;Deutschland;Polen;1;0
+18;GroupA;15.06.2006;15:00;Hamburg;Ecuador;Costa Rica;3;0
+19;GroupB;15.06.2006;18:00;Nürnberg;England;Trinidad und Tobago;2;0
+20;GroupB;15.06.2006;21:00;Berlin;Schweden;Paraguay;1;0
+21;GroupC;16.06.2006;15:00;Gelsenkirchen;Argentinien;Serbien und Montenegro;6;0
+22;GroupC;16.06.2006;18:00;Stuttgart;Niederlande;Elfenbeinküste;2;1
+23;GroupD;16.06.2006;21:00;Hannover;Mexiko;Angola;0;0
+24;GroupD;17.06.2006;15:00;Frankfurt;Portugal;Iran;2;0
+25;GroupE;17.06.2006;18:00;Köln;Tschechien;Ghana;0;2
+26;GroupE;17.06.2006;21:00;Kaiserslautern;Italien;USA;1;1
+27;GroupF;18.06.2006;15:00;Nürnberg;Japan;Kroatien;0;0
+28;GroupF;18.06.2006;18:00;München;Brasilien;Australien;2;0
+29;GroupG;18.06.2006;21:00;Leipzig;Frankreich;Südkorea;1;1
+30;GroupG;19.06.2006;15:00;Dortmund;Togo;Schweiz;0;2
+31;GroupH;19.06.2006;18:00;Hamburg;Saudi-Arabien;Ukraine;0;4
+32;GroupH;19.06.2006;21:00;Stuttgart;Spanien;Tunesien;3;1
+33;GroupA;20.06.2006;16:00;Berlin;Ecuador;Deutschland;0;3
+34;GroupA;20.06.2006;16:00;Hannover;Costa Rica;Polen;1;2
+35;GroupB;20.06.2006;21:00;Köln;Schweden;England;2;2
+36;GroupB;20.06.2006;21:00;Kaiserslautern;Paraguay;Trinidad und Tobago;2;0
+37;GroupD;21.06.2006;16:00;Gelsenkirchen;Portugal;Mexiko;2;1
+38;GroupD;21.06.2006;16:00;Leipzig;Iran;Angola;1;1
+39;GroupC;21.06.2006;21:00;Frankfurt;Niederlande;Argentinien;0;0
+40;GroupC;21.06.2006;21:00;München;Elfenbeinküste;Serbien und Montenegro;3;2
+41;GroupE;22.06.2006;16:00;Hamburg;Tschechien;Italien;0;2
+42;GroupE;22.06.2006;16:00;Nürnberg;Ghana;USA;2;1
+43;GroupF;22.06.2006;21:00;Dortmund;Japan;Brasilien;1;4
+44;GroupF;22.06.2006;21:00;Stuttgart;Kroatien;Australien;2;2
+45;GroupH;23.06.2006;16:00;Kaiserslautern;Saudi-Arabien;Spanien;0;1
+46;GroupH;23.06.2006;16:00;Berlin;Ukraine;Tunesien;1;0
+47;GroupG;23.06.2006;21:00;Köln;Togo;Frankreich;0;2
+48;GroupG;23.06.2006;21:00;Hannover;Schweiz;Südkorea;2;0
+49;AF1;24.06.2006;-;München;Deutschland;Schweden;2;0
+50;AF2;24.06.2006;-;Leipzig;Argentinien;Mexiko;2;1
+51;AF3;25.06.2006;-;Stuttgart;England;Ecuador;1;0
+52;AF4;25.06.2006;-;Nürnberg;Portugal;Niederlande;1;0
+53;AF5;26.06.2006;-;Kaiserslautern;Italien;Australien;1;0
+54;AF6;26.06.2006;-;Köln;Schweiz;Ukraine;0;3
+55;AF7;27.06.2006;-;Dortmund;Brasilien;Ghana;3;0
+56;AF8;27.06.2006;-;Hannover;Spanien;Frankreich;1;3
+57;VF1;30.06.2006;-;Berlin;Deutschland;Argentinien;5;3
+58;VF2;30.06.2006;-;Hamburg;Italien;Ukraine;3;0
+59;VF3;01.07.2006;-;Gelsenkirchen;England;Portugal;1;3
+60;VF4;01.07.2006;-;Frankfurt;Brasilien;Frankreich;0;1
+61;HF1;04.07.2006;-;Dortmund;Deutschland;Italien;0;2
+62;HF2;05.07.2006;-;München;Portugal;Frankreich;0;1
+63;P3;08.07.2006;-;Stuttgart;Deutschland;Portugal;3;1
+64;FINAL;09.07.2006;-;Berlin;Italien;Frankreich;6;4

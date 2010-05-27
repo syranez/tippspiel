@@ -1,0 +1,64 @@
+1;GroupA;11.06.2010;16:00;Johannesburg - JSC;Südafrika;Mexiko;-;-
+2;GroupA;11.06.2010;20:30;Kapstadt;Uruguay;Frankreich;-;-
+3;GroupB;12.06.2010;16:00;Johannesburg - JEP;Argentinien;Nigeria;-;-
+4;GroupB;12.06.2010;13:30;Nelson Mandela Bay/Port Elizabeth;Korea Republik;Griechenland;-;-
+5;GroupC;12.06.2010;20:30;Rustenburg;England;USA;-;-
+6;GroupC;13.06.2010;13:30;Polokwane;Algerien;Slowenien;-;-
+7;GroupD;13.06.2010;20:30;Durban;Deutschland;Australien;-;-
+8;GroupD;13.06.2010;16:00;Tshwane/Pretoria;Serbien;Ghana;-;-
+9;GroupE;14.06.2010;13:30;Johannesburg - JSC;Niederlande;Dänemark;-;-
+10;GroupE;14.06.2010;16:00;Mangaung / Bloemfontein;Japan;Kamerun;-;-
+11;GroupF;14.06.2010;20:30;Kapstadt;Italien;Paraguay;-;-
+12;GroupF;15.06.2010;13:30;Rustenburg;Neuseeland;Slowakei;-;-
+13;GroupG;15.06.2010;16:00;Nelson Mandela Bay/Port Elizabeth;Elfenbeinküste;Portugal;-;-
+14;GroupG;15.06.2010;20:30;Johannesburg - JEP;Brasilien;Korea DVR;-;-
+15;GroupH;16.06.2010;13:30;Nelspruit;Honduras;Chile;-;-
+16;GroupH;16.06.2010;16:00;Durban;Spanien;Schweiz;-;-
+17;GroupA;16.06.2010;20:30;Tshwane/Pretoria;Südafrika;Uruguay;-;-
+18;GroupA;17.06.2010;20:30;Polokwane;Frankreich;Mexiko;-;-
+19;GroupB;17.06.2010;16:00;Mangaung / Bloemfontein;Griechenland;Nigeria;-;-
+20;GroupB;17.06.2010;13:30;Johannesburg - JSC;Argentinien;Korea Republik;-;-
+21;GroupD;18.06.2010;13:30;Nelson Mandela Bay/Port Elizabeth;Deutschland;Serbien;-;-
+22;GroupC;18.06.2010;16:00;Johannesburg - JEP;Slowenien;USA;-;-
+23;GroupC;18.06.2010;20:30;Kapstadt;England;Algerien;-;-
+24;GroupD;19.06.2010;16:00;Rustenburg;Ghana;Australien;-;-
+25;GroupE;19.06.2010;13:30;Durban;Niederlande;Japan;-;-
+26;GroupE;19.06.2010;20:30;Tshwane/Pretoria;Kamerun;Dänemark;-;-
+27;GroupF;20.06.2010;13:30;Mangaung / Bloemfontein;Slowakei;Paraguay;-;-
+28;GroupF;20.06.2010;16:00;Nelspruit;Italien;Neuseeland;-;-
+29;GroupG;20.06.2010;20:30;Johannesburg - JSC;Brasilien;Elfenbeinküste;-;-
+30;GroupG;21.06.2010;13:30;Kapstadt;Portugal;Korea DVR;-;-
+31;GroupH;21.06.2010;16:00;Nelson Mandela Bay/Port Elizabeth;Chile;Schweiz;-;-
+32;GroupH;21.06.2010;20:30;Johannesburg - JEP;Spanien;Honduras;-;-
+33;GroupA;22.06.2010;16:00;Rustenburg;Mexiko;Uruguay;-;-
+34;GroupA;22.06.2010;16:00;Mangaung / Bloemfontein;Frankreich;Südafrika;-;-
+35;GroupB;22.06.2010;20:30;Durban;Nigeria;Korea Republik;-;-
+36;GroupB;22.06.2010;20:30;Polokwane;Griechenland;Argentinien;-;-
+37;GroupC;23.06.2010;16:00;Nelson Mandela Bay/Port Elizabeth;Slowenien;England;-;-
+38;GroupC;23.06.2010;16:00;Tshwane/Pretoria;USA;Algerien;-;-
+39;GroupD;23.06.2010;20:30;Johannesburg - JSC;Ghana;Deutschland;-;-
+40;GroupD;23.06.2010;20:30;Nelspruit;Australien;Serbien;-;-
+41;GroupF;24.06.2010;16:00;Johannesburg - JEP;Slowakei;Italien;-;-
+42;GroupF;24.06.2010;16:00;Polokwane;Paraguay;Neuseeland;-;-
+43;GroupE;24.06.2010;20:30;Rustenburg;Dänemark;Japan;-;-
+44;GroupE;24.06.2010;20:30;Kapstadt;Kamerun;Niederlande;-;-
+45;GroupG;25.06.2010;16:00;Durban;Portugal;Brasilien;-;-
+46;GroupG;25.06.2010;16:00;Nelspruit;Korea DVR;Elfenbeinküste;-;-
+47;GroupH;25.06.2010;20:30;Tshwane/Pretoria;Chile;Spanien;-;-
+48;GroupH;25.06.2010;20:30;Mangaung / Bloemfontein;Schweiz;Honduras;-;-
+49;AF1;26.06.2010;16:00;Nelson Mandela Bay/Port Elizabeth;1A;2B;-;-
+50;AF2;26.06.2010;20:30;Rustenburg;1C;2D;-;-
+51;AF3;27.06.2010;16:00;Mangaung / Bloemfontein;1D;2C;-;-
+52;AF4;27.06.2010;20:30;Johannesburg;1B;2A;-;-
+53;AF5;28.06.2010;16:00;Durban;1E;2F;-;-
+54;AF6;28.06.2010;20:30;Johannesburg;1G;2H;-;-
+55;AF7;29.06.2010;16:00;Tshwane/Pretoria;1F;2E;-;-
+56;AF8;29.06.2010;20:30;Kapstadt;1H;2G;-;-
+57;VF1;02.07.2010;16:00;Nelson Mandela Bay/Port Elizabeth;W53;W54;-;-
+58;VF2;02.07.2010;20:30;Johannesburg;W49;W50;-;-
+59;VF3;03.07.2010;16:00;Kapstadt;W52;W51;-;-
+60;VF4;03.07.2010;20:30;Johannesburg;W55;W56;-;-
+61;HF1;06.07.2010;20:30;Kapstadt;W58;W57;-;-
+62;HF2;07.07.2010;20:30;Durban;W59;W60;-;-
+63;P3;10.07.2010;20:30;Nelson Mandela Bay/Port Elizabeth;L61;L62;-;-
+64;FINAL;11.07.2010;20:30;Johannesburg;W61;W62;-;-

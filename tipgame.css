@@ -1,0 +1,167 @@
+/*
+	Formatierungsanweisungen für das TipGame.
+
+	Farben: #DEDEEE
+		#C8C8DD
+		#BABADC
+*/
+
+
+
+/*
+	Common
+*/
+
+body{background-color:#DEDEEE;font-family:Verdana,Arial,sans-serif;font-size:13px;color:black}
+.bold{font-weight:bold}
+
+/*
+	Header
+*/
+
+#TG_Header_Title{font-size:32px;font-weight:bold;text-decoration:underline}
+#TG_Header_StatsCreated{color:black;text-align:center}
+
+/*
+	Server Stats
+*/
+#PSSG_Server_TextTitle{color:black;font-size:large;font-weight:bolder}
+#PSSG_Server_Table{background-color:#BABADC;border-spacing:2px;text-align:center;width:100%}
+.PSSG_Server_Row0{font-size:small;background-color:#DEDEEE}
+.PSSG_Server_Row1{font-size:small;background-color:#C8C8DD}
+#PSSG_Server_HeadRow{background-color:#BABADC;font-size:small;text-align:center;font-weight:bold}
+#PSSG_Server_HeadTextRow{background-color:#BABADC;width:20%}
+#PSSG_Server_HeadName{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_HeadIPPort{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_HeadKilllogs{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_HeadLogPeriod{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_HeadTotalPlayers{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_HeadTotalKills{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_HeadTotalSuicides{background-color:#BABADC;width:20%;text-align:left}
+#PSSG_Server_ContentName{}
+#PSSG_Server_ContentIPPort{}
+#PSSG_Server_ContentKilllogs{}
+#PSSG_Server_ContentLogPeriod{}
+#PSSG_Server_ContentTotalPlayers{}
+#PSSG_Server_ContentTotalKills{}
+#PSSG_Server_ContentTotalSuicides{}
+#PSSG_Server_HeadTextName{font-size:small;font-weight:bold}
+#PSSG_Server_HeadTextIPPort{font-size:small;font-weight:bold}
+#PSSG_Server_HeadTextKilllogs{font-size:small;font-weight:bold}
+#PSSG_Server_HeadTextLogPeriod{font-size:small;font-weight:bold}
+#PSSG_Server_HeadTextTotalPlayers{font-size:small;font-weight:bold}
+#PSSG_Server_HeadTextTotalKills{font-size:small;font-weight:bold}
+#PSSG_Server_HeadTextTotalSuicides{font-size:small;font-weight:bold}
+#PSSG_Server_ContentTextName{font-size:small}
+#PSSG_Server_ContentTextIPPort{font-size:small}
+#PSSG_Server_ContentTextKilllogs{font-size:small}
+#PSSG_Server_ContentTextLogPeriod{font-size:small}
+#PSSG_Server_ContentTextTotalPlayers{font-size:small}
+#PSSG_Server_ContentTextTotalKills{font-size:small}
+#PSSG_Server_ContentTextTotalSuicides{font-size:small}
+
+/*
+	Player Stats
+*/
+
+#TG_Player_TextTitle{color:black;font-size:large;font-weight:bolder}
+#TG_Player_Table{background-color:#BABADC;border-spacing:2px;text-align:center;width:100%}
+#TG_Player_HeadRow{background-color:#BABADC;font-size:small;text-align:center;font-weight:bold}
+#TG_Player_HeadRank{background-color:#BABADC}
+#TG_Player_HeadPlayer{background-color:#BABADC}
+#TG_Player_HeadPoints{background-color:#BABADC}
+#PSSG_Player_HeadEnemyNo1{background-color:#BABADC}
+#PSSG_Player_HeadFavouriteEnemy{background-color:#BABADC}
+#PSSG_Player_HeadFavouriteWeapon{background-color:#BABADC}
+#PSSG_Player_HeadFearedWeapon{background-color:#BABADC}
+#PSSG_Player_HeadTextRank{margin:15px}
+#PSSG_Player_HeadTextPlayer{margin:15px}
+#PSSG_Player_HeadTextKills{margin:15px}
+#PSSG_Player_HeadTextDeaths{margin:15px}
+#PSSG_Player_HeadTextSelfKills{margin:15px}
+#PSSG_Player_HeadTextKD{margin:15px}
+#PSSG_Player_HeadTextEnemyNo1{margin:15px}
+#PSSG_Player_HeadTextFavouriteEnemy{margin:15px}
+#PSSG_Player_HeadTextFavouriteWeapon{margin:15px}
+#PSSG_Player_HeadTextFearedWeapon{margin:15px}
+.PSSG_Player_ContentRow0{font-size:small;background-color:#DEDEEE}
+.PSSG_Player_ContentRow1{font-size:small;background-color:#C8C8DD}
+.PSSG_Player_ContentRank{}
+.PSSG_Player_ContentPlayer{}
+.PSSG_Player_ContentKills{}
+.PSSG_Player_ContentDeaths{}
+.PSSG_Player_ContentSelfKills{}
+.PSSG_Player_ContentKD{}
+.PSSG_Player_ContentEnemyNo1{}
+.PSSG_Player_ContentFavouriteEnemy{}
+.PSSG_Player_ContentFavouriteWeapon{}
+.PSSG_Player_ContentFearedWeapon{}
+
+#PSSG_Player_NotTop_TextTitle{color:black;font-weight:bolder}
+#PSSG_Player_NotTop_Table{background-color:#DEDEEE;border-spacing:2px;text-align:center}
+.PSSG_Player_NotTop_Row{background-color:#C8C8DD;font-size:small;text-align:center}
+
+
+/*
+	Match Table Stats
+*/
+
+.TG_MTS_TextTitle{color:black;font-size:large;font-weight:bolder}
+.TG_MTS_Table{background-color:#BABADC;border-spacing:2px;text-align:center;width:100%}
+.MTS_Primary_RowWeaponNames{background-color:#BABADC;font-size:small;text-align:center}
+.TG_MTS_ContentRow0{font-size:small;background-color:#DEDEEE}
+.TG_MTS_ContentRow1{font-size:small;background-color:#C8C8DD}
+.PSSG_Weapon_Primary_TextWeapons{font-weight:bold}
+.PSSG_Weapon_Primary_TextWeaponNames{background-color:#BABADC}
+.PSSG_Weapon_Primary_TextPlayerNames{font-size:small}
+.PSSG_Weapon_Primary_TextWeaponCount{font-size:small}
+.PSSG_Weapon_Secondary_RowWeaponNames{background-color:#BABADC;font-size:small;text-align:center}
+.PSSG_Weapon_Secondary_ContentRow0{font-size:small;background-color:#DEDEEE}
+.PSSG_Weapon_Secondary_ContentRow1{font-size:small;background-color:#C8C8DD}
+.PSSG_Weapon_Secondary_TextWeapons{font-weight:bold}
+.PSSG_Weapon_Secondary_TextWeaponNames{background-color:#BABADC}
+.PSSG_Weapon_Secondary_TextPlayerNames{font-size:small}
+.PSSG_Weapon_Secondary_TextWeaponCount{font-size:small}
+
+/*
+	Who Killed Who
+*/
+
+#PSSG_WhoKilledWho_TextTitle{color:black;font-size:large;font-weight:bolder}
+#PSSG_WhoKilledWho_Table{background-color:#BABADC;border-spacing:2px;text-align:center;width:80%}
+#PSSG_WhoKilledWho_RowPlayerNames{background-color:#BABADC;font-size:small;text-align:center;margin:10px}
+#PSSG_WhoKilledWho_TextPlayers{font-weight:bold}
+.PSSG_WhoKilledWho_Field0{background-color:#DEDEEE}
+.PSSG_WhoKilledWho_Field1{background-color:#C8C8DD}
+.PSSG_WhoKilledWho_ColumnPlayerNames{background-color:#BABADC;font-size:small;text-align:left}
+.PSSG_WhoKilledWho_TextPlayerNames{font-size:small}
+.PSSG_WhoKilledWho_TextKillCount{font-size:small}
+
+/*
+	Other Stats
+*/
+#PSSG_Other_TextTitle{color:black;font-size:large;font-weight:bolder}
+#PSSG_Other_Table{background-color:#BABADC;border-spacing:2px;text-align:left;width:80%}
+#PSSG_Other_HeadRow{background-color:#BABADC;text-align:center}
+#PSSG_Other_HeadTextRow{font-size:small;font-weight:bold}
+.PSSG_Other_Text{font-size:small}
+.PSSG_Other_Row0{background-color:#C8C8DD}
+.PSSG_Other_Row1{background-color:#DEDEEE}
+
+
+
+
+
+
+
+
+
+
+
+#PSSG_Footer
+{
+      font-family: "Arial narrow", Arial, sans-serif;
+      font-size: 10px;
+      color: black;
+      text-align: center;
+}
