@@ -739,10 +739,6 @@ sub isWinnerTippCorrect {
         MatchWinner($TD_Table[$_[0]][$TD{FIRST_SCORE}],$TD_Table[$_[0]][$TD{SECOND_SCORE}]) ? return 1 : return 0;
 }
 
-#
-#   some nasty stuff
-#
-
 sub sortPlayers {
     my @uniqueValues =
         sort {$b <=> $a}
