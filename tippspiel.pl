@@ -176,19 +176,21 @@ sub PrintGamerTable {
         </tr>";
 
     readGamersData();
-    my @Result = crappyHashSort();
+    my @results = sortPlayers();
     my $prePoints = 0;
 
-    for ( my $i = 0; $i < 2*(my $Anzahl = keys(%Gamer_Points)); $i += 2 ) {
- 	if ( $prePoints == $Result[$i+1] ) {
+    for my $result (@results) {
+ 	if ( $prePoints == $result->{points} ) {
         	$Position--;
 	}      
-        $OUTPUT .= "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
-                <td>".$Position."</td> \
-                <td><a href=\"".$TIPP_GAME_URI."?id=".$GameData."\&amp;user=".$Result[$i]."\">".$Result[$i]."</a></td> \
-                <td>".$Result[$i+1]."</td> \
-            </tr>";
-	$prePoints = $Result[$i+1];
+        $OUTPUT .= <<EOT;
+<tr class=\"TG_MTS_ContentRow${RowColor}\">
+    <td>$Position</td>
+    <td><a href=\"${TIPP_GAME_URI}?id=${GameData}\&amp;user=$result->{player}\">$result->{player}</a></td>
+    <td>$result->{points}</td>
+</tr>
+EOT
+	$prePoints = $result->{points};
         $Position++;
         $RowColor = ($RowColor+1)%2;
     }
@@ -741,38 +743,24 @@ sub isWinnerTippCorrect {
 #   some nasty stuff
 #
 
-sub crappyHashSort {
-    my $i = 0;
-    my @sortierteSchluessel = sort keys %Gamer_Points;
-    my @V;
-    my $Dubletten = -1;
-    my $Number = 0;
-    my @Result;
-    my $ResultCounter = 0;
+sub sortPlayers {
+    my @uniqueValues =
+        sort {$b <=> $a}
+        keys %{{
+            map { ($_ => 1) }
+            values %Gamer_Points
+        }};
 
-    # Read values
-    foreach(@sortierteSchluessel) {
-        $V[$i] = $Gamer_Points{$_};
-        $i++;
+    my @results;
+
+    my @all_players = sort keys %Gamer_Points;
+
+    for my $value (@uniqueValues) {
+        my @players =
+            grep { $Gamer_Points{$_} == $value }
+            @all_players;
+        push @results, map +{ player => $_, points => $Gamer_Points{$_} }, @players;
     }
 
-    my @sortedValues = sort {$b <=> $a} @V;
-
-    foreach(@sortedValues){
-        if ( $_ != $Dubletten ) {
-            $Number = $_;
-            $Dubletten = $_;
-            foreach(@sortierteSchluessel){
-                if ( $Gamer_Points{$_} == $Number ) {
-                    $Result[$ResultCounter] = $_;
-                    $ResultCounter++;
-                    $Result[$ResultCounter] = $Number;
-                    $ResultCounter++;
-                    delete $Gamer_Points{'$_'};
-                }
-            }
-        }
-    }
-
-    return @Result;
+    return @results;
 }
