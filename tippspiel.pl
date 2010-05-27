@@ -59,20 +59,17 @@ my $TIPP_GAME_URI = "http://www.minaga-church.de/cgi-bin/tippspiel/tippspiel.pl"
 # Lese und parse Argumente
 # Read Argument
 my $ArgumentString = $ENV{'QUERY_STRING'} || '';
-my @Arguments = split(/&/,$ArgumentString);
-my @Temp;
 
 my $GameData = "NONE";
 my $Gamer = "NONE";
 
-foreach (@Arguments) {
-   @Temp = split(/=/,$_);
+foreach (split /&/, $ArgumentString) {
+   my ($key, $value) = split /=/;
    
-   if ( $Temp[0] eq "id" ) {
-      $GameData = $Temp[1];
-   }
-   elsif ( $Temp[0] eq "user" ) {
-      $Gamer = $Temp[1];
+   if ( $key eq "id" ) {
+      $GameData = $value;
+   } elsif ( $key eq "user" ) {
+      $Gamer = $value;
    }
 }
 
