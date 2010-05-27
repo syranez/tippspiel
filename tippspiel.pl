@@ -259,47 +259,50 @@ sub PrintRoundData {
     # Matches
     for ( $MatchID = 0; $MatchID <= $#TD_Table; $MatchID++ )
     {
+        my %td = %{$TD_Table[$MatchID]};
+        my %gd = %{$GamerData_Table[$MatchID]};
         if ( isMatchTyp($MatchID, $RoundID) ) {
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
-                <td>$TD_Table[$MatchID]{DATE}</td> \
-                <td>$TD_Table[$MatchID]{CLOCK}</td> \
-                <td>$TD_Table[$MatchID]{PLACE}</td> \
-                <td>$TD_Table[$MatchID]{FIRST} - $TD_Table[$MatchID]{SECOND}</td>";
-		if ( $TD_Table[$MatchID]{FIRST_SCORE} eq '' ) {
+                <td>$td{DATE}</td> \
+                <td>$td{CLOCK}</td> \
+                <td>$td{PLACE}</td> \
+                <td>$td{FIRST} - $td{SECOND}</td>";
+		if ( $td{FIRST_SCORE} eq '' ) {
 			$OUTPUT .= "<td>-</td>";
 		}
 		else {
-	                $OUTPUT .= "<td>$TD_Table[$MatchID]{FIRST_SCORE} : $TD_Table[$MatchID]{SECOND_SCORE}</td>";
+	                $OUTPUT .= "<td>$td{FIRST_SCORE} : $td{SECOND_SCORE}</td>";
 		}
                 if ( isGamer($Gamer) and ($RoundID =~ /^Group/) ) {
-                    if ( compareTipAndResult($MatchID) == 0 )
+                    my $comp = compareTipAndResult($MatchID);
+                    if ( $comp == 0 )
                     {
                         # kein korrekter Tipp
                         $OUTPUT .= "<td><span> \
-                            <font style=\"color:#FF0000\">".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
-                            <font style=\"color:#FF0000\">".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
+                            <font style=\"color:#FF0000\">$gd{FIRST_SCORE}</font> : \
+                            <font style=\"color:#FF0000\">$gd{SECOND_SCORE}</font></span></td>";
                     }
-                    elsif ( compareTipAndResult($MatchID) == 1 )
+                    elsif ( $comp == 1 )
                     {
                         # Tendenz richtig
                         $OUTPUT .= "<td><span> \
-                            <font style=\"color:orange\">".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
-                            <font style=\"color:orange\">".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
+                            <font style=\"color:orange\">$gd{FIRST_SCORE}</font> : \
+                            <font style=\"color:orange\">$gd{SECOND_SCORE}</font></span></td>";
                     }
-                    elsif ( compareTipAndResult($MatchID) == 3 )
+                    elsif ( $comp == 3 )
                     {
                         # richtiger Tipp
                         $OUTPUT .= "<td><span> \
-                            <font style=\"color:green\">".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
-                            <font style=\"color:green\">".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
+                            <font style=\"color:green\">$gd{FIRST_SCORE}</font> : \
+                            <font style=\"color:green\">$gd{SECOND_SCORE}</font></span></td>";
                     }
                     else
                     {
                         if ( isGamerDataAvailable($MatchID) ) {
                             $OUTPUT .= "<td><span> \
-                                <font>".$GamerData_Table[$MatchID]{FIRST_SCORE}."</font> : \
-                                <font>".$GamerData_Table[$MatchID]{SECOND_SCORE}."</font></span></td>";
+                                <font>$gd{FIRST_SCORE}</font> : \
+                                <font>$gd{SECOND_SCORE}</font></span></td>";
                         }
                         else {
                             $OUTPUT .= "<td></td>";
@@ -340,35 +343,36 @@ sub PrintRoundTable {
 
     # Tabellendaten berechnen
     for ( $MatchID = 0; $MatchID <= $#TD_Table; $MatchID++ ) {
+        my %td = %{$TD_Table[$MatchID]};
         if ( isMatchTyp($MatchID, $RoundID) and isDataAvailable($MatchID) ) {
-            $Teams{$TD_Table[$MatchID]{FIRST}} += 0;
-	    $Teams{$TD_Table[$MatchID]{SECOND}} += 0;
+            $Teams{$td{FIRST}} += 0;
+	    $Teams{$td{SECOND}} += 0;
 
-            $ShotTors{$TD_Table[$MatchID]{FIRST}} += $TD_Table[$MatchID]{FIRST_SCORE};
-            $ShotTors{$TD_Table[$MatchID]{SECOND}} += $TD_Table[$MatchID]{SECOND_SCORE};
-            $GotTors{$TD_Table[$MatchID]{FIRST}} += $TD_Table[$MatchID]{SECOND_SCORE};
-            $GotTors{$TD_Table[$MatchID]{SECOND}} += $TD_Table[$MatchID]{FIRST_SCORE};
+            $ShotTors{$td{FIRST}} += $td{FIRST_SCORE};
+            $ShotTors{$td{SECOND}} += $td{SECOND_SCORE};
+            $GotTors{$td{FIRST}} += $td{SECOND_SCORE};
+            $GotTors{$td{SECOND}} += $td{FIRST_SCORE};
 
             # Erster Spieler
-            if ( $TD_Table[$MatchID]{FIRST_SCORE} > $TD_Table[$MatchID]{SECOND_SCORE} ) {
+            if ( $td{FIRST_SCORE} > $td{SECOND_SCORE} ) {
                 # Spieler 1 hat gewonnen
-                $Teams{$TD_Table[$MatchID]{FIRST}} += 3;
+                $Teams{$td{FIRST}} += 3;
             }
 
-            elsif ( $TD_Table[$MatchID]{FIRST_SCORE} == $TD_Table[$MatchID]{SECOND_SCORE} ) {
+            elsif ( $td{FIRST_SCORE} == $td{SECOND_SCORE} ) {
                     # Unentschieden
-                    $Teams{$TD_Table[$MatchID]{FIRST}} += 1;
+                    $Teams{$td{FIRST}} += 1;
             }
 
             # Zweiter Spieler
-            if ( $TD_Table[$MatchID]{SECOND_SCORE} > $TD_Table[$MatchID]{FIRST_SCORE} ) {
+            if ( $td{SECOND_SCORE} > $td{FIRST_SCORE} ) {
                 # Spieler 2 hat gewonnen
-                $Teams{$TD_Table[$MatchID]{SECOND}} += 3;
+                $Teams{$td{SECOND}} += 3;
             }
 
-            elsif ( $TD_Table[$MatchID]{SECOND_SCORE} == $TD_Table[$MatchID]{FIRST_SCORE} ) {
+            elsif ( $td{SECOND_SCORE} == $td{FIRST_SCORE} ) {
                 # Unentschieden
-                $Teams{$TD_Table[$MatchID]{SECOND}} += 1;
+                $Teams{$td{SECOND}} += 1;
             }
         }
     }
@@ -440,11 +444,12 @@ sub PrintRoundTipp {
 
     for ( $MatchID = $PlayersSetCount; $MatchID <= $#TD_Table; $MatchID++ ) {
         if ( isMatchTyp($MatchID, $RoundID) ) {
+            my %gd = %{$GamerData_Table[$MatchID]};
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
                 <td> \
-                <span>".$GamerData_Table[$MatchID]{FIRST} ."</span> - <span>". $GamerData_Table[$MatchID]{SECOND} ."</span></td> \
-                <td><span>".$GamerData_Table[$MatchID]{FIRST_SCORE} ."</span> : <span>". $GamerData_Table[$MatchID]{SECOND_SCORE} ."</span></td> \
+                <span>".$gd{FIRST} ."</span> - <span>". $gd{SECOND} ."</span></td> \
+                <td><span>".$gd{FIRST_SCORE} ."</span> : <span>". $gd{SECOND_SCORE} ."</span></td> \
                 </tr>";
                 $RowColor = ($RowColor+1)%2;
         }
