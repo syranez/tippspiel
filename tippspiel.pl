@@ -20,7 +20,7 @@ my $PlayersSetCount;
 my @TD_Table;
 
 # Gamer data table
-my @GamerData_Table;
+my @GD_Table;
 
 # Count of Gamers
 my $GamerCount = 0;
@@ -260,7 +260,7 @@ sub PrintRoundData {
     for ( $MatchID = 0; $MatchID <= $#TD_Table; $MatchID++ )
     {
         my %td = %{$TD_Table[$MatchID]};
-        my %gd = %{$GamerData_Table[$MatchID]};
+        my %gd = %{$GD_Table[$MatchID]};
         if ( isMatchTyp($MatchID, $RoundID) ) {
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
@@ -444,7 +444,7 @@ sub PrintRoundTipp {
 
     for ( $MatchID = $PlayersSetCount; $MatchID <= $#TD_Table; $MatchID++ ) {
         if ( isMatchTyp($MatchID, $RoundID) ) {
-            my %gd = %{$GamerData_Table[$MatchID]};
+            my %gd = %{$GD_Table[$MatchID]};
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
                 <td> \
@@ -532,7 +532,7 @@ sub extractGamersData {
     foreach(@Lines) {
         @DataSet = split(/;/,$_);
         foreach(@DataSet) {
-            $GamerData_Table[$i]{$GDC[$j]} = $_;
+            $GD_Table[$i]{$GDC[$j]} = $_;
             $j++;
         }
         $i++;
@@ -560,7 +560,7 @@ sub extractGamerPoints {
     foreach(@Lines) {
         @DataSet = split(/;/,$_);
         foreach(@DataSet) {
-            $GamerData_Table[$i]{$GDC[$j]} = $_;
+            $GD_Table[$i]{$GDC[$j]} = $_;
             $j++;
         }
         $i++;
@@ -677,7 +677,7 @@ sub isDataAvailable {
 }
 
 sub isGamerDataAvailable {
-        $GamerData_Table[$_[0]]{FIRST_SCORE} ne $NO_DATA
+        $GD_Table[$_[0]]{FIRST_SCORE} ne $NO_DATA
 }
 
 # Überprüft, ob keine Daten fuer Argument 0 vorliegen
@@ -699,7 +699,7 @@ sub isNoDataOverallAvailable {
 # Return: 0, wenn nein ; 1, wenn ja
 # Aufruf: isGamersTeamTipCorrect($MatchID,$TD_FIRST,$PD_FIRST);
 sub isGamersTeamTipCorrect {
-    return $TD_Table[$_[0]]{$_[1]} eq $GamerData_Table[$_[0]]{$_[2]};
+    return $TD_Table[$_[0]]{$_[1]} eq $GD_Table[$_[0]]{$_[2]};
 }
 
 # Überprueft, ob der Spieltyp von Argument 0 gleich Argument 1 ist.
@@ -722,16 +722,16 @@ sub isGamer {
 # Argument: $_[0]: Match-ID
 # Return: 1, wenn korrekt ; 0; wenn nicht korrekt
 sub isTippCorrect {
-        $GamerData_Table[$_[0]]{FIRST_SCORE} == $TD_Table[$_[0]]{FIRST_SCORE}
+        $GD_Table[$_[0]]{FIRST_SCORE} == $TD_Table[$_[0]]{FIRST_SCORE}
     and
-        $GamerData_Table[$_[0]]{SECOND_SCORE} == $TD_Table[$_[0]]{SECOND_SCORE};
+        $GD_Table[$_[0]]{SECOND_SCORE} == $TD_Table[$_[0]]{SECOND_SCORE};
 }
 
 # Überprüft, ob der Gewinner korrekt getippt wurde
 # Argument: $_[0]: Match-ID
 # Return: 1, wenn korrekt ; 0; wenn nicht korrekt
 sub isWinnerTippCorrect {
-        MatchWinner($GamerData_Table[$_[0]]{FIRST_SCORE},$GamerData_Table[$_[0]]{SECOND_SCORE})
+        MatchWinner($GD_Table[$_[0]]{FIRST_SCORE},$GD_Table[$_[0]]{SECOND_SCORE})
     eq
         MatchWinner($TD_Table[$_[0]]{FIRST_SCORE},$TD_Table[$_[0]]{SECOND_SCORE});
 }
