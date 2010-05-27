@@ -108,20 +108,20 @@ sub PrintDocument {
         $PlayersSetCount = 48;
         $GameName = "Weltmeisterschaft 2006";
         $OUTPUT .=
-            PrintRounds("GroupA", "GroupB", "GroupC", "GroupD", "GroupE", "GroupG", "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
+            PrintRounds(map("Group$_", "A" .. "H"), "AF*", "VF*", "HF*", "P3", "FINAL");
     }
     elsif ( $_[0] eq "wm2010" ) {
         $PlayersSetCount = 48;
         $GameName = "Weltmeisterschaft 2010";
         $OUTPUT .=
-            PrintRounds("GroupA", "GroupB", "GroupC", "GroupD", "GroupE", "GroupG", "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
+            PrintRounds(map("Group$_", "A" .. "H"), "AF*", "VF*", "HF*", "P3", "FINAL");
 
     }
     elsif ( $_[0] eq "em2008" ) {
         $PlayersSetCount = 24;
         $GameName = "Europameisterschaft 2008";
         $OUTPUT .=
-            PrintRounds("GroupA", "GroupB", "GroupC", "GroupD", "VF*", "HF*", "FINAL");
+            PrintRounds(map("Group$_", "A" .. "D"), "VF*", "HF*", "FINAL");
     }
 
     return PrintHTMLHeader().PrintHTMLTop().PrintGamerTable().$OUTPUT."</body></html>\n";
