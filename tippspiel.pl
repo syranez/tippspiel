@@ -385,15 +385,15 @@ sub PrintRoundTable {
     }
 
     # Reihenfolge berechnen
-    my $TeamCount = keys(%Teams);
+    my $InitialTeamCount = keys(%Teams);
     my @sortKeys;
-    my $HighestPoints = 0;
-    my $Player;
 
-    while ( (my $Anzahl = keys(%Teams)) > 0 )
+    while ( (my $Remaining = keys(%Teams)) > 0 )
     {
-        $HighestPoints = 0;
-        @sortKeys = sort keys %Teams;
+        my $HighestPoints = 0;
+        my @sortKeys = sort keys %Teams;
+
+        my $Player = $sortKeys[0];
 
         foreach (@sortKeys)
         {
@@ -418,15 +418,20 @@ sub PrintRoundTable {
             }
         }
 
-        my $Position = $TeamCount - $Anzahl + 1;
-        $OUTPUT .=
-                "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
-                <td>".$Position."</td> \
-                <td>".$Player."</td> \
-                <td>".$ShotTors{$Player}." : ".$GotTors{$Player}."</td> \
-                <td>".$Teams{$Player}."</td></tr>";
+        my $Position = $InitialTeamCount - $Remaining + 1;
+        $OUTPUT .= <<EOT;
+        <tr class=\"TG_MTS_ContentRow${RowColor}\">
+            <td>$Position</td>
+            <td>$Player</td>
+            <td>$ShotTors{$Player} : $GotTors{$Player}</td>
+            <td>$Teams{$Player}</td>
+        </tr>
+EOT
         $RowColor = ($RowColor+1)%2;
-        delete $Teams{$Player}; delete $ShotTors{$Player}; delete $GotTors{$Player};
+
+        delete $Teams{$Player};
+        delete $ShotTors{$Player};
+        delete $GotTors{$Player};
     }
 
     return $OUTPUT."</table></div>";
