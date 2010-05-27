@@ -20,6 +20,7 @@ my $PlayersSetCount;
 my @TD_Table;
 
 # Gamer data table
+my %GD_Tables;
 my @GD_Table;
 
 # Count of Gamers
@@ -79,11 +80,25 @@ if ( $GameData ne "wm2006" and $GameData ne "em2008" ) {
 
 print STDERR "GameData: $GameData\nGamer: $Gamer\n";
 
+if ( $GameData eq "wm2006" ) {
+    $PlayersSetCount = 48;
+    $GameName = "Weltmeisterschaft 2006";
+}
+elsif ( $GameData eq "wm2010" ) {
+    $PlayersSetCount = 48;
+    $GameName = "Weltmeisterschaft 2010";
+}
+elsif ( $GameData eq "em2008" ) {
+    $PlayersSetCount = 24;
+    $GameName = "Europameisterschaft 2008";
+}
+
 # Get data of game
 readGameData($GameData);
+readGamersData();
 
 if ( $Gamer ne "NONE" ) {
-extractGamersData($Gamer);
+    @GD_Table = @{$GD_Tables{$Gamer}};
 }
 
 print PrintDocument($GameData);
@@ -101,21 +116,14 @@ sub PrintDocument {
     my $OUTPUT;
 
     if ( $_[0] eq "wm2006" ) {
-        $PlayersSetCount = 48;
-        $GameName = "Weltmeisterschaft 2006";
         $OUTPUT .=
             PrintRounds("GroupA" .. "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
     }
     elsif ( $_[0] eq "wm2010" ) {
-        $PlayersSetCount = 48;
-        $GameName = "Weltmeisterschaft 2010";
         $OUTPUT .=
             PrintRounds("GroupA" .. "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
-
     }
     elsif ( $_[0] eq "em2008" ) {
-        $PlayersSetCount = 24;
-        $GameName = "Europameisterschaft 2008";
         $OUTPUT .=
             PrintRounds("GroupA" .. "GroupD", "VF*", "HF*", "FINAL");
     }
@@ -171,7 +179,6 @@ sub PrintGamerTable {
             <td id=\"TG_Player_HeadPoints\">Punkte</td> \
         </tr>";
 
-    readGamersData();
     my @results = sortPlayers();
     my $prePoints = 0;
 
@@ -515,31 +522,6 @@ sub readGamersData {
 	}
 }
 
-sub extractGamersData {
-    my $Gamer = shift;
-    my $GamerPoints;    # pro Match
-    my @DataSet;
-    my $i = 0;
-    my $j = 0;
-
-    # Read data of $Gamer
-    my $file = "$GameData/players/$Gamer";
-    open(file_Player, "<", $file) || die "$file not found.";
-    my @Lines = <file_Player>;
-    close(file_Player);
-
-    # Interpret $GameData
-    foreach(@Lines) {
-        @DataSet = split(/;/,$_);
-        foreach(@DataSet) {
-            $GD_Table[$i]{$GDC[$j]} = $_;
-            $j++;
-        }
-        $i++;
-        $j = 0;
-    }
-}
-
 # Berechnet die Punkte jedes Spielers
 # Argumente: 0: Spieler
 # Return: -
@@ -560,12 +542,14 @@ sub extractGamerPoints {
     foreach(@Lines) {
         @DataSet = split(/;/,$_);
         foreach(@DataSet) {
-            $GD_Table[$i]{$GDC[$j]} = $_;
+            $GD_Tables{$Gamer}[$i]{$GDC[$j]} = $_;
             $j++;
         }
         $i++;
         $j = 0;
     }
+
+    @GD_Table = @{$GD_Tables{$Gamer}};
 
     # Give Points for Matches, where the opponents were known before game begin.
     for ( $i = 0; $i < $PlayersSetCount; $i++ ) {
