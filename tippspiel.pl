@@ -52,8 +52,6 @@ my $NO_DATA = "-";
 # URI of the tip game.
 my $TIPP_GAME_URI = "http://www.minaga-church.de/cgi-bin/tippspiel/tippspiel.pl";
 
-my @ZEILEN;
-
 #
 # Code
 #
