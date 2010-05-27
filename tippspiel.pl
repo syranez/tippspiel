@@ -669,16 +669,15 @@ sub GivePoints {
 # Argument: Spiel-ID
 # Return: 0, wenn nein ; 1, wenn ja
 sub isDataAvailable {
-        ($TD_Table[$_[0]]{FIRST} eq $NO_DATA
-    or
-        $TD_Table[$_[0]]{FIRST_SCORE} eq $NO_DATA
-    or
-        $TD_Table[$_[0]]{SECOND_SCORE} eq $NO_DATA) ? return 0 : return 1;
+        ($TD_Table[$_[0]]{FIRST} ne $NO_DATA
+    and
+        $TD_Table[$_[0]]{FIRST_SCORE} ne $NO_DATA
+    and
+        $TD_Table[$_[0]]{SECOND_SCORE} ne $NO_DATA);
 }
 
 sub isGamerDataAvailable {
         $GamerData_Table[$_[0]]{FIRST_SCORE} ne $NO_DATA
-         ? return 1 : return 0;
 }
 
 # Überprüft, ob keine Daten fuer Argument 0 vorliegen
@@ -700,7 +699,7 @@ sub isNoDataOverallAvailable {
 # Return: 0, wenn nein ; 1, wenn ja
 # Aufruf: isGamersTeamTipCorrect($MatchID,$TD_FIRST,$PD_FIRST);
 sub isGamersTeamTipCorrect {
-    $TD_Table[$_[0]]{$_[1]} eq $GamerData_Table[$_[0]]{$_[2]} ? return 1 : return 0;
+    return $TD_Table[$_[0]]{$_[1]} eq $GamerData_Table[$_[0]]{$_[2]};
 }
 
 # Überprueft, ob der Spieltyp von Argument 0 gleich Argument 1 ist.
@@ -708,7 +707,7 @@ sub isGamersTeamTipCorrect {
 # Return 0, wenn nein ; 1, wenn ja
 # Aufruf: isMatchTyp($MatchID, $MatchTyp);
 sub isMatchTyp {
-    $TD_Table[$_[0]]{TYPE} =~ /^$_[1]/ ? return 1 : return 0;
+    return $TD_Table[$_[0]]{TYPE} =~ /^$_[1]/;
 }
 
 # Überprueft, ob Argument 0 nicht gleich "NONE" ist.
@@ -716,7 +715,7 @@ sub isMatchTyp {
 # Return 0, wenn nein ; 1, wenn ja
 # Aufruf: isGamer($Gamer);
 sub isGamer {
-    $_[0] ne "NONE" ? return 1 : return 0;
+    $_[0] ne "NONE";
 }
 
 # Überprüft, ob der Tipp korrekt ist
@@ -725,7 +724,7 @@ sub isGamer {
 sub isTippCorrect {
         $GamerData_Table[$_[0]]{FIRST_SCORE} == $TD_Table[$_[0]]{FIRST_SCORE}
     and
-        $GamerData_Table[$_[0]]{SECOND_SCORE} == $TD_Table[$_[0]]{SECOND_SCORE} ? return 1 : return 0;
+        $GamerData_Table[$_[0]]{SECOND_SCORE} == $TD_Table[$_[0]]{SECOND_SCORE};
 }
 
 # Überprüft, ob der Gewinner korrekt getippt wurde
@@ -734,7 +733,7 @@ sub isTippCorrect {
 sub isWinnerTippCorrect {
         MatchWinner($GamerData_Table[$_[0]]{FIRST_SCORE},$GamerData_Table[$_[0]]{SECOND_SCORE})
     eq
-        MatchWinner($TD_Table[$_[0]]{FIRST_SCORE},$TD_Table[$_[0]]{SECOND_SCORE}) ? return 1 : return 0;
+        MatchWinner($TD_Table[$_[0]]{FIRST_SCORE},$TD_Table[$_[0]]{SECOND_SCORE});
 }
 
 sub sortPlayers {
