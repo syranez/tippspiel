@@ -1,6 +1,9 @@
 #!/usr/bin/perl -w
 
 use strict;
+use warnings;
+#use Data::Dumper; #debug
+
 #use CGI::Carp qw(fatalsToBrowser);
 
 #
@@ -26,15 +29,8 @@ my $GamerCount = 0;
 my %Gamer_Points;
 
 # Interpret TableData as #1;GroupA;07.06.2008;18:00;Basel;Schweiz;Tschechien;-;-
-my $TD_ID = 0;              # ID
-my $TD_TYPE = 1;            # Typ of Game
-my $TD_DATE = 2;            # Date of Game
-my $TD_CLOCK = 3;           # Start of Game
-my $TD_PLACE = 4;           # Place of Game
-my $TD_FIRST = 5;           # Name of Player One
-my $TD_SECOND = 6;          # Name of Player Two
-my $TD_FIRST_SCORE = 7;     # Scores Player One
-my $TD_SECOND_SCORE = 8;    # Scores Player Two
+my @TDC = qw(ID TYPE DATE CLOCK PLACE FIRST SECOND FIRST_SCORE SECOND_SCORE);
+my %TD = map { $TDC[$_] => $_ } 0 .. $#TDC;
 
 # Interpret PD_Table
 my $GD_FIRST = 1;           # Name of player one
@@ -56,7 +52,7 @@ my @ZEILEN;
 
 # Lese und parse Argumente
 # Read Argument
-my $ArgumentString = $ENV{'QUERY_STRING'};
+my $ArgumentString = $ENV{'QUERY_STRING'} || '';
 my @Arguments = split(/&/,$ArgumentString);
 my @Temp;
 
@@ -283,15 +279,15 @@ sub PrintRoundData {
         if ( isMatchTyp($MatchID, $RoundID) ) {
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
-                <td>$TD_Table[$MatchID][$TD_DATE]</td> \
-                <td>$TD_Table[$MatchID][$TD_CLOCK]</td> \
-                <td>$TD_Table[$MatchID][$TD_PLACE]</td> \
-                <td>$TD_Table[$MatchID][$TD_FIRST] - $TD_Table[$MatchID][$TD_SECOND]</td>";
-		if ( $TD_Table[$MatchID][$TD_FIRST_SCORE] eq '' ) {
+                <td>$TD_Table[$MatchID][$TD{DATE}]</td> \
+                <td>$TD_Table[$MatchID][$TD{CLOCK}]</td> \
+                <td>$TD_Table[$MatchID][$TD{PLACE}]</td> \
+                <td>$TD_Table[$MatchID][$TD{FIRST}] - $TD_Table[$MatchID][$TD{SECOND}]</td>";
+		if ( $TD_Table[$MatchID][$TD{FIRST_SCORE}] eq '' ) {
 			$OUTPUT .= "<td>-</td>";
 		}
 		else {
-	                $OUTPUT .= "<td>$TD_Table[$MatchID][$TD_FIRST_SCORE] : $TD_Table[$MatchID][$TD_SECOND_SCORE]</td>";
+	                $OUTPUT .= "<td>$TD_Table[$MatchID][$TD{FIRST_SCORE}] : $TD_Table[$MatchID][$TD{SECOND_SCORE}]</td>";
 		}
                 if ( isGamer($Gamer) and ($RoundID =~ /^Group/) ) {
                     if ( compareTipAndResult($MatchID) == 0 )
@@ -362,34 +358,34 @@ sub PrintRoundTable {
     # Tabellendaten berechnen
     for ( $MatchID = 0; $MatchID <= $#TD_Table; $MatchID++ ) {
         if ( isMatchTyp($MatchID, $RoundID) and isDataAvailable($MatchID) ) {
-            $Teams{$TD_Table[$MatchID][$TD_FIRST]} += 0;
-	    $Teams{$TD_Table[$MatchID][$TD_SECOND]} += 0;
+            $Teams{$TD_Table[$MatchID][$TD{FIRST}]} += 0;
+	    $Teams{$TD_Table[$MatchID][$TD{SECOND}]} += 0;
 
-            $ShotTors{$TD_Table[$MatchID][$TD_FIRST]} += $TD_Table[$MatchID][$TD_FIRST_SCORE];
-            $ShotTors{$TD_Table[$MatchID][$TD_SECOND]} += $TD_Table[$MatchID][$TD_SECOND_SCORE];
-            $GotTors{$TD_Table[$MatchID][$TD_FIRST]} += $TD_Table[$MatchID][$TD_SECOND_SCORE];
-            $GotTors{$TD_Table[$MatchID][$TD_SECOND]} += $TD_Table[$MatchID][$TD_FIRST_SCORE];
+            $ShotTors{$TD_Table[$MatchID][$TD{FIRST}]} += $TD_Table[$MatchID][$TD{FIRST_SCORE}];
+            $ShotTors{$TD_Table[$MatchID][$TD{SECOND}]} += $TD_Table[$MatchID][$TD{SECOND_SCORE}];
+            $GotTors{$TD_Table[$MatchID][$TD{FIRST}]} += $TD_Table[$MatchID][$TD{SECOND_SCORE}];
+            $GotTors{$TD_Table[$MatchID][$TD{SECOND}]} += $TD_Table[$MatchID][$TD{FIRST_SCORE}];
 
             # Erster Spieler
-            if ( $TD_Table[$MatchID][$TD_FIRST_SCORE] > $TD_Table[$MatchID][$TD_SECOND_SCORE] ) {
+            if ( $TD_Table[$MatchID][$TD{FIRST_SCORE}] > $TD_Table[$MatchID][$TD{SECOND_SCORE}] ) {
                 # Spieler 1 hat gewonnen
-                $Teams{$TD_Table[$MatchID][$TD_FIRST]} += 3;
+                $Teams{$TD_Table[$MatchID][$TD{FIRST}]} += 3;
             }
 
-            elsif ( $TD_Table[$MatchID][$TD_FIRST_SCORE] == $TD_Table[$MatchID][$TD_SECOND_SCORE] ) {
+            elsif ( $TD_Table[$MatchID][$TD{FIRST_SCORE}] == $TD_Table[$MatchID][$TD{SECOND_SCORE}] ) {
                     # Unentschieden
-                    $Teams{$TD_Table[$MatchID][$TD_FIRST]} += 1;
+                    $Teams{$TD_Table[$MatchID][$TD{FIRST}]} += 1;
             }
 
             # Zweiter Spieler
-            if ( $TD_Table[$MatchID][$TD_SECOND_SCORE] > $TD_Table[$MatchID][$TD_FIRST_SCORE] ) {
+            if ( $TD_Table[$MatchID][$TD{SECOND_SCORE}] > $TD_Table[$MatchID][$TD{FIRST_SCORE}] ) {
                 # Spieler 2 hat gewonnen
-                $Teams{$TD_Table[$MatchID][$TD_SECOND]} += 3;
+                $Teams{$TD_Table[$MatchID][$TD{SECOND}]} += 3;
             }
 
-            elsif ( $TD_Table[$MatchID][$TD_SECOND_SCORE] == $TD_Table[$MatchID][$TD_FIRST_SCORE] ) {
-                    # Unentschieden
-                    $Teams{$TD_Table[$MatchID][$TD_SECOND]} += 1;
+            elsif ( $TD_Table[$MatchID][$TD{SECOND_SCORE}] == $TD_Table[$MatchID][$TD{FIRST_SCORE}] ) {
+                # Unentschieden
+                $Teams{$TD_Table[$MatchID][$TD{SECOND}]} += 1;
             }
         }
     }
@@ -632,13 +628,13 @@ sub compareSetTeams {
     my $MatchID = shift;
 
     if ( isDataAvailable($MatchID) and isGamerDataAvailable($MatchID) ) {
-        if ( isGamersTeamTipCorrect($MatchID, $TD_FIRST, $GD_FIRST) and
-            isGamersTeamTipCorrect($MatchID, $TD_SECOND, $GD_SECOND) ) {
+        if ( isGamersTeamTipCorrect($MatchID, $TD{FIRST}, $GD_FIRST) and
+            isGamersTeamTipCorrect($MatchID, $TD{SECOND}, $GD_SECOND) ) {
             # Wenn der Spieler beide Teams richtig gesetzt hat, gibt es zwei Punkte
             return 2;
         }
-        elsif ( isGamersTeamTipCorrect($MatchID, $TD_FIRST, $GD_FIRST) or
-                isGamersTeamTipCorrect($MatchID, $TD_SECOND, $GD_SECOND) ) {
+        elsif ( isGamersTeamTipCorrect($MatchID, $TD{FIRST}, $GD_FIRST) or
+                isGamersTeamTipCorrect($MatchID, $TD{SECOND}, $GD_SECOND) ) {
             # Wenn der Spieler ein Team richtig gesetzt hat, gibt es einen Punkt
             return 1;
         }
@@ -684,11 +680,11 @@ sub GivePoints {
 # Argument: Spiel-ID
 # Return: 0, wenn nein ; 1, wenn ja
 sub isDataAvailable {
-        ($TD_Table[$_[0]][$TD_FIRST] eq $NO_DATA
+        ($TD_Table[$_[0]][$TD{FIRST}] eq $NO_DATA
     or
-        $TD_Table[$_[0]][$TD_FIRST_SCORE] eq $NO_DATA
+        $TD_Table[$_[0]][$TD{FIRST_SCORE}] eq $NO_DATA
     or
-        $TD_Table[$_[0]][$TD_SECOND_SCORE] eq $NO_DATA) ? return 0 : return 1;
+        $TD_Table[$_[0]][$TD{SECOND_SCORE}] eq $NO_DATA) ? return 0 : return 1;
 }
 
 sub isGamerDataAvailable {
@@ -706,7 +702,7 @@ sub isGamerDataAvailable {
 sub isNoDataOverallAvailable {
     for ( my $i = 0; $i <= $#TD_Table; $i++ )
     {
-        if ( ($TD_Table[$i][$TD_TYPE] eq $_[0]) and isDataAvailable($i) ) {
+        if ( ($TD_Table[$i][$TD{TYPE}] eq $_[0]) and isDataAvailable($i) ) {
             return 0;
         }
     }
@@ -727,7 +723,7 @@ sub isGamersTeamTipCorrect {
 # Return 0, wenn nein ; 1, wenn ja
 # Aufruf: isMatchTyp($MatchID, $MatchTyp);
 sub isMatchTyp {
-    $TD_Table[$_[0]][$TD_TYPE] =~ /^$_[1]/ ? return 1 : return 0;
+    $TD_Table[$_[0]][$TD{TYPE}] =~ /^$_[1]/ ? return 1 : return 0;
 }
 
 # Überprueft, ob Argument 0 nicht gleich "NONE" ist.
@@ -742,9 +738,9 @@ sub isGamer {
 # Argument: $_[0]: Match-ID
 # Return: 1, wenn korrekt ; 0; wenn nicht korrekt
 sub isTippCorrect {
-        $GamerData_Table[$_[0]][$GD_FIRST_SCORE] == $TD_Table[$_[0]][$TD_FIRST_SCORE]
+        $GamerData_Table[$_[0]][$GD_FIRST_SCORE] == $TD_Table[$_[0]][$TD{FIRST_SCORE}]
     and
-        $GamerData_Table[$_[0]][$GD_SECOND_SCORE] == $TD_Table[$_[0]][$TD_SECOND_SCORE] ? return 1 : return 0;
+        $GamerData_Table[$_[0]][$GD_SECOND_SCORE] == $TD_Table[$_[0]][$TD{SECOND_SCORE}] ? return 1 : return 0;
 }
 
 # Überprüft, ob der Gewinner korrekt getippt wurde
@@ -753,7 +749,7 @@ sub isTippCorrect {
 sub isWinnerTippCorrect {
         MatchWinner($GamerData_Table[$_[0]][$GD_FIRST_SCORE],$GamerData_Table[$_[0]][$GD_SECOND_SCORE])
     eq
-        MatchWinner($TD_Table[$_[0]][$TD_FIRST_SCORE],$TD_Table[$_[0]][$TD_SECOND_SCORE]) ? return 1 : return 0;
+        MatchWinner($TD_Table[$_[0]][$TD{FIRST_SCORE}],$TD_Table[$_[0]][$TD{SECOND_SCORE}]) ? return 1 : return 0;
 }
 
 #
