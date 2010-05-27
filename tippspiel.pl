@@ -77,6 +77,7 @@ if ( $GameData ne "wm2006" and $GameData ne "em2008" ) {
    $GameData = "wm2010";
 }
 
+print STDERR "GameData: $GameData\nGamer: $Gamer\n";
 
 # Get data of game
 readGameData($GameData);
