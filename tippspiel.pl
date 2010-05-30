@@ -252,6 +252,7 @@ sub PrintRoundData {
         .PrintHeader($RoundName)
         . "<table class=\"TG_MTS_Table\"> \
         <tr> \
+            <td>Spiel-ID</td> \
             <td>Datum</td> \
             <td>Uhrzeit</td> \
             <td>Ort</td> \
@@ -271,6 +272,7 @@ sub PrintRoundData {
         if ( isMatchTyp($MatchID, $RoundID) ) {
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
+                <td>$td{ID}</td> \
                 <td>$td{DATE}</td> \
                 <td>$td{CLOCK}</td> \
                 <td>$td{PLACE}</td> \
