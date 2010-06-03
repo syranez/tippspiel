@@ -22,7 +22,6 @@ function getTipp() {
 	tempSplit[1] = "";
 	split($2, tempSplit, ":");
 
-
 	getTipp();
 	
 	print tempSplit[1] ";" team1 ";" team2 ";" tipp_team1 ";" tipp_team2
