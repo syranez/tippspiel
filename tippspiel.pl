@@ -214,7 +214,7 @@ sub PrintRound($) {
 
     my $OUTPUT =
         "<div align=\"center\"> \
-        <table width=\"80%\"><tr><td>"
+        <table width=\"90%\"><tr><td>"
         .PrintRoundData($RoundName, $RoundID)
         ."</td><td>";
 
