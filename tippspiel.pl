@@ -115,6 +115,9 @@ sub PrintDocument {
     # Punktetabelle der Spieler
     my $OUTPUT;
 
+    # Regeln für die Punktevergabe
+    $OUTPUT .= PrintPointRules();
+
     if ( $_[0] eq "wm2006" ) {
         $OUTPUT .=
             PrintRounds("GroupA" .. "GroupH", "AF*", "VF*", "HF*", "P3", "FINAL");
@@ -146,6 +149,24 @@ Content-type: text/html
 <meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />
 </head>
 EOT
+}
+
+# Schreibt die Regeln für die Punktevergabe
+# Argumente: -
+# Return: HTML-String
+sub PrintPointRules {
+    return
+	"<div align=\"center\">"
+	.PrintHeader("Punktevergabe")
+	."<table width=\"90%\" style=\"background-color:#BABADC;border-spacing:2px;text-align:center\"> \
+	<tr> \
+	<td>Es gibt <b>3</b> Punkte für den korrekten Tipp des Ergebnisses.</td> \
+	</tr> \
+	<tr> \
+ 	<td>Es gibt <b>1</b> Punkt für den korrekten Tipp des Siegers.</td> \
+	</tr> \
+	</table></div>"
+	.PrintFreeSpace();
 }
 
 sub PrintHTMLTop {
