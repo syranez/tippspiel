@@ -412,11 +412,16 @@ sub PrintRoundTable {
             if ( $Teams{$_} == $HighestPoints and $_ ne $Player )
             {
                 # Tordifferenz berechnen
-                if ( $ShotTors{$_}-$GotTors{$_} >= $ShotTors{$Player}-$GotTors{$Player} )
+                if ( $ShotTors{$_}-$GotTors{$_} > $ShotTors{$Player}-$GotTors{$Player} )
                 {
                     $Player = $_;
                 }
-                # Was wenn es gleich ist?
+
+                # Wenn die Tordifferenz gleich ist, dann zählt die Anzahl der geschossenen Tore
+                if ( $ShotTors{$_} > $ShotTors{$Player} )
+                {
+                    $Player = $_;
+                }	
             }
         }
 
