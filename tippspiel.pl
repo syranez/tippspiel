@@ -115,6 +115,9 @@ sub PrintDocument {
     # Punktetabelle der Spieler
     my $OUTPUT;
 
+    # Neuigkeiten
+    $OUTPUT .= PrintNews();
+
     # Regeln für die Punktevergabe
     $OUTPUT .= PrintPointRules();
 
@@ -167,6 +170,22 @@ sub PrintPointRules {
 	</tr> \
 	</table></div>"
 	.PrintFreeSpace();
+}
+
+# Schreibt Nachrichten auf die Seite
+# Argumente: -
+# Return: HTML-String
+# TODO: News aus Datei auslesen
+sub PrintNews {
+    return
+	"<div align=\"center\">"
+	.PrintHeader("News")
+	."<table width=\"90%\" style=\"background-color:#BABADC;border-spacing:2px;text-align:center\"> \
+	<tr> \
+	<td><p align=\"left\"><b>(25. Juni 2010)</b><span> Das Achtelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href=\"http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt\">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Achtelfinalspiele sind nach dem Kommentar <em>#Achtelfinale</em> zu finden.</p></td> \
+	</tr> \
+	</table></div>"
+	.PrintFreeSpace();	
 }
 
 sub PrintHTMLTop {
