@@ -324,39 +324,7 @@ sub PrintRoundData {
 	                $OUTPUT .= "<td>$td{FIRST_SCORE} : $td{SECOND_SCORE}</td>";
 		}
                 if ( isGamer($Gamer) and ($RoundID =~ /^Group/) ) {
-                    my $comp = compareTipAndResult($MatchID);
-                    if ( $comp == 0 )
-                    {
-                        # kein korrekter Tipp
-                        $OUTPUT .= "<td><span> \
-                            <font style=\"color:#FF0000\">$gd{FIRST_SCORE}</font> : \
-                            <font style=\"color:#FF0000\">$gd{SECOND_SCORE}</font></span></td>";
-                    }
-                    elsif ( $comp == 1 )
-                    {
-                        # Tendenz richtig
-                        $OUTPUT .= "<td><span> \
-                            <font style=\"color:orange\">$gd{FIRST_SCORE}</font> : \
-                            <font style=\"color:orange\">$gd{SECOND_SCORE}</font></span></td>";
-                    }
-                    elsif ( $comp == 3 )
-                    {
-                        # richtiger Tipp
-                        $OUTPUT .= "<td><span> \
-                            <font style=\"color:green\">$gd{FIRST_SCORE}</font> : \
-                            <font style=\"color:green\">$gd{SECOND_SCORE}</font></span></td>";
-                    }
-                    else
-                    {
-                        if ( isGamerDataAvailable($MatchID) ) {
-                            $OUTPUT .= "<td><span> \
-                                <font>$gd{FIRST_SCORE}</font> : \
-                                <font>$gd{SECOND_SCORE}</font></span></td>";
-                        }
-                        else {
-                            $OUTPUT .= "<td></td>";
-                        }
-                    }
+			$OUTPUT .= "<td>" . colourTip($MatchID) . "</td>";
                 }
 
                 $OUTPUT .= "</tr>";
@@ -510,39 +478,7 @@ sub PrintRoundTipp {
                 <td> \
                 <span>".$gd{FIRST} ."</span> - <span>". $gd{SECOND} ."</span></td>";
 
- 	   my $comp = compareTipAndResult($MatchID);
-           if ( $comp == 0 )
-           {
-                # kein korrekter Tipp
-                $OUTPUT .= "<td><span> \
-                   <font style=\"color:#FF0000\">$gd{FIRST_SCORE}</font> : \
-                   <font style=\"color:#FF0000\">$gd{SECOND_SCORE}</font></span></td>";
-           }
-           elsif ( $comp == 1 )
-           {
-               # Tendenz richtig
-               $OUTPUT .= "<td><span> \
-                    <font style=\"color:orange\">$gd{FIRST_SCORE}</font> : \
-                    <font style=\"color:orange\">$gd{SECOND_SCORE}</font></span></td>";
-           }
-           elsif ( $comp == 3 )
-           {
-               # richtiger Tipp
-               $OUTPUT .= "<td><span> \
-                    <font style=\"color:green\">$gd{FIRST_SCORE}</font> : \
-                    <font style=\"color:green\">$gd{SECOND_SCORE}</font></span></td>";
-           }
-           else
-           {
-               if ( isGamerDataAvailable($MatchID) ) {
-                   $OUTPUT .= "<td><span> \
-                       <font>$gd{FIRST_SCORE}</font> : \
-                       <font>$gd{SECOND_SCORE}</font></span></td>";
-               }
-               else {
-                   $OUTPUT .= "<td></td>";
-               }
-            }
+            $OUTPUT .= "<td>" . colourTip($MatchID) . "</td>";
 
 	    $OUTPUT .= "</tr>";
             $RowColor = ($RowColor+1)%2;
@@ -828,4 +764,48 @@ sub sortPlayers {
     }
 
     return @results;
+}
+
+# Färbt die Tipps entsprechend des Ergebnisses farbig ein.
+#
+# Argumente
+#	1: ID des Spiels
+#
+# Return
+#	HTML-String <span><font>FIRST_SCORE</font> : <font>SECOND_SCORE</font></span>
+#
+# Gibt es keinen Tipp für eine Begegnung, so wird ein Nullstring zurückgegeben.
+# Ansonsten wird der Tipp des Spielers mit dem Ergebnis verglichen und je nach
+# Ausgang farbig gefärbt.
+sub colourTip {
+	my $MatchID = shift;
+	my $colour = "black";
+
+	if ( ! isGamerDataAvailable($MatchID) ) {
+		return "";
+	}
+
+        my $comp = compareTipAndResult($MatchID);
+	if ( $comp eq "0" ) {
+		# kein korrekter Tip
+		$colour = "red";
+	} elsif ( $comp eq "1" ) {
+		# Tendenz richtig
+		$colour = "orange";
+	} elsif ( $comp eq "2" ) {
+		# richtiger Tipp
+		$colour = "green";
+	}
+
+	return "<span><font style=\"color:"
+		. $colour
+		. "\">"
+		. $gd{FIRST_SCORE}
+		. "</font>"
+		. ":"
+		. "<font style=\"color:"
+		. $colour
+		. "\">"
+		. $gd{SECOND_SCORE}
+		. "</font></span>";
 }
