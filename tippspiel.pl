@@ -780,6 +780,7 @@ sub sortPlayers {
 sub colourTip {
 	my $MatchID = shift;
 	my $colour = "black";
+        my %gd = %{$GD_Table[$MatchID]};
 
 	if ( ! isGamerDataAvailable($MatchID) ) {
 		return "";
@@ -792,20 +793,16 @@ sub colourTip {
 	} elsif ( $comp eq "1" ) {
 		# Tendenz richtig
 		$colour = "orange";
-	} elsif ( $comp eq "2" ) {
+	} elsif ( $comp eq "3" ) {
 		# richtiger Tipp
 		$colour = "green";
 	}
 
-	return "<span><font style=\"color:"
-		. $colour
-		. "\">"
-		. $gd{FIRST_SCORE}
-		. "</font>"
-		. ":"
-		. "<font style=\"color:"
-		. $colour
-		. "\">"
-		. $gd{SECOND_SCORE}
-		. "</font></span>";
+	return <<EOT;
+<span>
+<font style="color:$colour">$gd{FIRST_SCORE}</font>
+:
+<font style="color:$colour">$gd{SECOND_SCORE}</font>
+</span>
+EOT
 }
