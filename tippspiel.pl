@@ -269,7 +269,7 @@ sub PrintRound($) {
     # Normalerweise alles ueber den Gruppenphasen.
     else {
         if ( $Gamer ne "NONE" ) {
-            $OUTPUT .= PrintRoundTipp($RoundName, $RoundID);
+            $OUTPUT .= PrintRoundTipp($RoundName, $RoundID, $Gamer);
         }
     }
 
@@ -490,6 +490,7 @@ EOT
 sub PrintRoundTipp {
     my $RoundName = shift;
     my $RoundID = shift;
+    my $Gamer = shift;
     my $MatchID = 0;
     my $RowColor = 0;
 
@@ -507,10 +508,44 @@ sub PrintRoundTipp {
             $OUTPUT .=
                 "<tr class=\"TG_MTS_ContentRow".$RowColor."\"> \
                 <td> \
-                <span>".$gd{FIRST} ."</span> - <span>". $gd{SECOND} ."</span></td> \
-                <td><span>".$gd{FIRST_SCORE} ."</span> : <span>". $gd{SECOND_SCORE} ."</span></td> \
-                </tr>";
-                $RowColor = ($RowColor+1)%2;
+                <span>".$gd{FIRST} ."</span> - <span>". $gd{SECOND} ."</span></td>";
+
+ 	   my $comp = compareTipAndResult($MatchID);
+           if ( $comp == 0 )
+           {
+                # kein korrekter Tipp
+                $OUTPUT .= "<td><span> \
+                   <font style=\"color:#FF0000\">$gd{FIRST_SCORE}</font> : \
+                   <font style=\"color:#FF0000\">$gd{SECOND_SCORE}</font></span></td>";
+           }
+           elsif ( $comp == 1 )
+           {
+               # Tendenz richtig
+               $OUTPUT .= "<td><span> \
+                    <font style=\"color:orange\">$gd{FIRST_SCORE}</font> : \
+                    <font style=\"color:orange\">$gd{SECOND_SCORE}</font></span></td>";
+           }
+           elsif ( $comp == 3 )
+           {
+               # richtiger Tipp
+               $OUTPUT .= "<td><span> \
+                    <font style=\"color:green\">$gd{FIRST_SCORE}</font> : \
+                    <font style=\"color:green\">$gd{SECOND_SCORE}</font></span></td>";
+           }
+           else
+           {
+               if ( isGamerDataAvailable($MatchID) ) {
+                   $OUTPUT .= "<td><span> \
+                       <font>$gd{FIRST_SCORE}</font> : \
+                       <font>$gd{SECOND_SCORE}</font></span></td>";
+               }
+               else {
+                   $OUTPUT .= "<td></td>";
+               }
+            }
+
+	    $OUTPUT .= "</tr>";
+            $RowColor = ($RowColor+1)%2;
         }
     }
 
