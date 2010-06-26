@@ -618,10 +618,11 @@ sub extractGamerPoints {
         elsif ( compareSetTeams($i) == 2 ) {
             # set teams are correct
             GivePoints($Gamer,2);
-            # go check the result
-            $GamerPoints = compareTipAndResult($i);
-            if ( $GamerPoints != -1 ) { GivePoints($Gamer,$GamerPoints); }
-        }
+	}
+
+        # go check the result
+        $GamerPoints = compareTipAndResult($i);
+        if ( $GamerPoints != -1 ) { GivePoints($Gamer,$GamerPoints); }
     }
 }
 
