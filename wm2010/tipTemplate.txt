@@ -2,6 +2,7 @@
 # Ab dem Achtelfinale können zusätzlich auch die Mannschaften getippt werden.
 # Beachte: Ersetze nur die jeweiligen '-' mit Deinen Tipps. Unlesbare Datensätze werden ignoriert.
 
+# Gruppenphase
 Spiel  1: Südafrika           versus              Mexiko: Tipp: (-:-)
 Spiel  2: Uruguay             versus          Frankreich: Tipp: (-:-)
 Spiel  3: Argentinien         versus             Nigeria: Tipp: (-:-)
@@ -50,19 +51,24 @@ Spiel 45: Portugal            versus           Brasilien: Tipp: (-:-)
 Spiel 46: Korea DVR           versus      Elfenbeinküste: Tipp: (-:-)
 Spiel 47: Chile               versus             Spanien: Tipp: (-:-)
 Spiel 48: Schweiz             versus            Honduras: Tipp: (-:-)
-Spiel 49: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 50: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 51: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 52: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 53: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 54: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 55: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 56: (-)                 versus                 (-): Tipp: (-:-)
+# Achtelfinale
+Spiel 49: Uruguay             versus      Korea Republik: Tipp: (-:-)
+Spiel 50: USA                 versus               Ghana: Tipp: (-:-)
+Spiel 51: Deutschland         versus          	 England: Tipp: (-:-)
+Spiel 52: Argentinien         versus              Mexiko: Tipp: (-:-)
+Spiel 53: Niederlande         versus            Slowakei: Tipp: (-:-)
+Spiel 54: Brasilien           versus               Chile: Tipp: (-:-)
+Spiel 55: Paraguay            versus               Japan: Tipp: (-:-)
+Spiel 56: Spanien             versus            Portugal: Tipp: (-:-)
+# Viertelfinale
 Spiel 57: (-)                 versus                 (-): Tipp: (-:-)
 Spiel 58: (-)                 versus                 (-): Tipp: (-:-)
 Spiel 59: (-)                 versus                 (-): Tipp: (-:-)
 Spiel 60: (-)                 versus                 (-): Tipp: (-:-)
+# Halbfinale
 Spiel 61: (-)                 versus                 (-): Tipp: (-:-)
 Spiel 62: (-)                 versus                 (-): Tipp: (-:-)
+# Spiel um Platz Drei
 Spiel 63: (-)                 versus                 (-): Tipp: (-:-)
+# Finale
 Spiel 64: (-)                 versus                 (-): Tipp: (-:-)
