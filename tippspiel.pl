@@ -624,17 +624,15 @@ sub compareTipAndResult {
 sub compareSetTeams {
     my $MatchID = shift;
 
-    if ( isDataAvailable($MatchID) and isGamerDataAvailable($MatchID) ) {
-        if ( isGamersTeamTipCorrect($MatchID, 'FIRST', 'FIRST') and
+    if ( isGamersTeamTipCorrect($MatchID, 'FIRST', 'FIRST') and
+        isGamersTeamTipCorrect($MatchID, 'SECOND', 'SECOND') ) {
+        # Wenn der Spieler beide Teams richtig gesetzt hat, gibt es zwei Punkte
+        return 2;
+    }
+    elsif ( isGamersTeamTipCorrect($MatchID, 'FIRST', 'FIRST') or
             isGamersTeamTipCorrect($MatchID, 'SECOND', 'SECOND') ) {
-            # Wenn der Spieler beide Teams richtig gesetzt hat, gibt es zwei Punkte
-            return 2;
-        }
-        elsif ( isGamersTeamTipCorrect($MatchID, 'FIRST', 'FIRST') or
-                isGamersTeamTipCorrect($MatchID, 'SECOND', 'SECOND') ) {
-            # Wenn der Spieler ein Team richtig gesetzt hat, gibt es einen Punkt
-            return 1;
-        }
+        # Wenn der Spieler ein Team richtig gesetzt hat, gibt es einen Punkt
+        return 1;
     }
 
     return 0;
