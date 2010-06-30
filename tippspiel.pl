@@ -166,12 +166,13 @@ sub PrintHTMLHeader
     return <<EOT;
 Content-type: text/html
 
-<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">
-<html xmlns=\"http://www.w3.org/1999/xhtml\">
-<head><title>$GameName</title>
-<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.minaga-church.de/tippspiel/tipgame.css\" />
-<meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" />
-</head>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <title>$GameName</title>
+  <link rel="stylesheet" type="text/css" href="http://www.minaga-church.de/tippspiel/tipgame.css" />
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+ </head>
 EOT
 }
 
@@ -180,19 +181,18 @@ EOT
 # Return: HTML-String
 sub PrintPointRules
 {
-    return
-        "<div align=\"center\">"
-      . PrintHeader("Punktevergabe")
-      . "<table width=\"90%\" style=\"background-color:#BABADC;border-spacing:2px;text-align:center\"> \
-	<tr> \
-	<td>Es gibt <b>3</b> Punkte für den korrekten Tipp des Ergebnisses.</td> \
-	</tr> \
-	<tr> \
- 	<td>Es gibt <b>1</b> Punkt für den korrekten Tipp des Siegers.</td> \
-	</tr> \
-	</table></div>"
-      . PrintFreeSpace();
+    return <<EOT;
+<div align="center">
+ @{[PrintHeader("Punktevergabe")]}
+ <table width="90%" style="background-color:#BABADC;border-spacing:2px;text-align:center">
+  <tr><td>Es gibt <b>3</b> Punkte für den korrekten Tipp des Ergebnisses.</td></tr>
+  <tr><td>Es gibt <b>1</b> Punkt für den korrekten Tipp des Siegers.</td></tr>
+ </table>
+</div>
+@{[PrintFreeSpace()]}
+EOT
 }
+
 
 # Schreibt Nachrichten auf die Seite
 # Argumente: -
@@ -200,30 +200,37 @@ sub PrintPointRules
 # TODO: News aus Datei auslesen
 sub PrintNews
 {
-    return
-        "<div align=\"center\">"
-      . PrintHeader("News")
-      . "<table width=\"90%\" style=\"background-color:#BABADC;border-spacing:2px;text-align:center\"> \
-        <tr> \
-	<td><p align=\"left\"><b>(29. Juni 2010)</b><span> Das Viertelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href=\"http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt\">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Viertelfinalspiele sind nach dem Kommentar <em>#Viertelfinale</em> zu finden.</p></td> \
-	</tr> \
-	<tr> \
-	<td><p align=\"left\"><b>(25. Juni 2010)</b><span> Das Achtelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href=\"http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt\">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Achtelfinalspiele sind nach dem Kommentar <em>#Achtelfinale</em> zu finden.</p></td> \
-	</tr> \
-	</table></div>"
-      . PrintFreeSpace();
+    return <<EOT;
+<div align="center">
+ @{[PrintHeader("News")]}
+ <table width="90%" style="background-color:#BABADC;border-spacing:2px;text-align:center">
+  <tr>
+   <td><p align="left"><b>(29. Juni 2010)</b><span> Das Viertelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href="http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Viertelfinalspiele sind nach dem Kommentar <em>#Viertelfinale</em> zu finden.</p>
+   </td>
+  </tr>
+  <tr>
+   <td><p align="left"><b>(25. Juni 2010)</b><span> Das Achtelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href="http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Achtelfinalspiele sind nach dem Kommentar <em>#Achtelfinale</em> zu finden.</p>
+   </td>
+  </tr>
+ </table>
+</div>
+@{[PrintFreeSpace()]}
+EOT
 }
 
 sub PrintHTMLTop
 {
     my $CTIME_String = localtime(time);
 
-    return "<body><div align=\"center\"> \
-        <span id=\"TG_Header_Title\">$GameName</span>"
-      . PrintFreeSpace()
-      . "<span id=\"TG_Header_StatsCreated\">Statistik erstellt am $CTIME_String.</span> \
-        </div>"
-      . PrintFreeSpace();
+    return <<EOT;
+<body>
+ <div align="center">
+  <span id="TG_Header_Title">$GameName</span>
+  @{[PrintFreeSpace()]}
+  <span id="TG_Header_StatsCreated">Statistik erstellt am $CTIME_String.</span>
+ </div>
+ @{[PrintFreeSpace()]}
+EOT
 }
 
 # Schreibt die Punktetabelle der Spieler
@@ -236,15 +243,16 @@ sub PrintGamerTable
     my $Position = 1;
     my $Points   = 0;
     my $RowColor = 0;
-    my $OUTPUT =
-        "<div align=\"center\">"
-      . PrintHeader("Spieler Statistik")
-      . "<table style=\"background-color:#BABADC;border-spacing:2px;text-align:center\"> \
-        <tr> \
-            <td id=\"TG_Player_HeadRank\">Position</td> \
-            <td id=\"TG_Player_HeadPlayer\">Spieler</td> \
-            <td id=\"TG_Player_HeadPoints\">Punkte</td> \
-        </tr>";
+    my $OUTPUT = <<EOT;
+<div align="center">
+ @{[PrintHeader("Spieler Statistik")]}
+ <table style="background-color:#BABADC;border-spacing:2px;text-align:center">
+  <tr>
+   <td id="TG_Player_HeadRank">Position</td>
+   <td id="TG_Player_HeadPlayer">Spieler</td>
+   <td id="TG_Player_HeadPoints">Punkte</td>
+  </tr>
+EOT
 
     my @results   = sortPlayers();
     my $prePoints = 0;
@@ -256,10 +264,10 @@ sub PrintGamerTable
             $Position--;
         }
         $OUTPUT .= <<EOT;
-<tr class=\"TG_MTS_ContentRow${RowColor}\">
-    <td>$Position</td>
-    <td><a href=\"${TIPP_GAME_URI}?id=${GameData}\&amp;user=$result->{player}\">$result->{player}</a></td>
-    <td>$result->{points}</td>
+<tr class="TG_MTS_ContentRow${RowColor}">
+ <td>$Position</td>
+ <td><a href="${TIPP_GAME_URI}?id=${GameData}\&amp;user=$result->{player}\">$result->{player}</a></td>
+ <td>$result->{points}</td>
 </tr>
 EOT
         $prePoints = $result->{points};
@@ -267,7 +275,11 @@ EOT
         $RowColor = ( $RowColor + 1 ) % 2;
     }
 
-    return $OUTPUT . "</table></div>" . PrintFreeSpace();
+    return $OUTPUT .= <<EOT;
+ </table>
+</div>
+@{[PrintFreeSpace()]}
+EOT
 }
 
 sub PrintRounds(@)
@@ -283,9 +295,13 @@ sub PrintRound($)
     my ($RoundID) = @_;
     my $RoundName = $longname{$RoundID};
 
-    my $OUTPUT = "<div align=\"center\"> \
-        <table width=\"90%\"><tr><td>"
-      . PrintRoundData( $RoundName, $RoundID ) . "</td><td>";
+    my $OUTPUT = <<EOT;
+<div align="center">
+ <table width="90%">
+  <tr>
+   <td>@{[PrintRoundData($RoundName, $RoundID)]}</td>
+   <td>
+EOT
 
     if ( $RoundID =~ /^Group/ )
     {
@@ -305,7 +321,13 @@ sub PrintRound($)
         }
     }
 
-    return $OUTPUT . "</td></tr></table></div>" . PrintFreeSpace();
+    return $OUTPUT . <<EOT;
+   </td>
+  </tr>
+ </table>
+</div>
+@{[PrintFreeSpace()]}
+EOT
 }
 
 # Schreibt die Begegnungen der jeweiligen Turnierrunde und evtl. die Tipps
@@ -320,17 +342,18 @@ sub PrintRoundData
     my $TablePosition = 1;
 
     # Header
-    my $OUTPUT =
-        "<div align=\"center\">"
-      . PrintHeader($RoundName)
-      . "<table class=\"TG_MTS_Table\"> \
-        <tr> \
-            <td>Spiel-ID</td> \
-            <td>Datum</td> \
-            <td>Uhrzeit</td> \
-            <td>Ort</td> \
-            <td>Spiel</td> \
-            <td>Ergebnis</td>";
+    my $OUTPUT = <<EOT;
+<div align="center">
+ @{[PrintHeader($RoundName)]}
+ <table class="TG_MTS_Table">
+  <tr>
+   <td>Spiel-ID</td>
+   <td>Datum</td>
+   <td>Uhrzeit</td>
+   <td>Ort</td>
+   <td>Spiel</td>
+   <td>Ergebnis</td>
+EOT
     if ( isGamer($Gamer) and ( $RoundID =~ /^Group/ ) )
     {
         $OUTPUT .= "<td>Tipp</td>";
@@ -345,12 +368,14 @@ sub PrintRoundData
         my %gd = %{ $GD_Table[$MatchID] };
         if ( isMatchTyp( $MatchID, $RoundID ) )
         {
-            $OUTPUT .= "<tr class=\"TG_MTS_ContentRow" . $RowColor . "\"> \
-                <td>$td{ID}</td> \
-                <td>$td{DATE}</td> \
-                <td>$td{CLOCK}</td> \
-                <td>$td{PLACE}</td> \
-                <td>$td{FIRST} - $td{SECOND}</td>";
+            $OUTPUT .= <<EOT;
+<tr class="TG_MTS_ContentRow$RowColor">
+ <td>$td{ID}</td>
+ <td>$td{DATE}</td>
+ <td>$td{CLOCK}</td>
+ <td>$td{PLACE}</td>
+ <td>$td{FIRST} - $td{SECOND}</td>
+EOT
             if ( $td{FIRST_SCORE} eq '' )
             {
                 $OUTPUT .= "<td>-</td>";
@@ -369,7 +394,10 @@ sub PrintRoundData
         }
     }
 
-    return $OUTPUT . "</table></div>";
+    return $OUTPUT .= <<EOT;
+ </table>
+</div>
+EOT
 }
 
 # Schreibt die Tabelle fuer die Gruppenbegegnungen
@@ -386,15 +414,17 @@ sub PrintRoundTable
     my %ShotTors;
     my %GotTors;
 
-    my $OUTPUT =
-        "<div align=\"center\">"
-      . PrintHeader("Tabelle")
-      . "<table class=\"TG_MTS_Table\"> \
-        <tr> \
-            <td>Platz</td> \
-            <td>Mannschaft</td> \
-            <td>Tore</td> \
-            <td>Punkte</td></tr>";
+    my $OUTPUT = <<EOT;
+<div align="center">
+ @{[PrintHeader("Tabelle")]}
+ <table class="TG_MTS_Table">
+  <tr>
+   <td>Platz</td>
+   <td>Mannschaft</td>
+   <td>Tore</td>
+   <td>Punkte</td>
+  </tr>
+EOT
 
     # Tabellendaten berechnen
     for ( $MatchID = 0 ; $MatchID <= $#TD_Table ; $MatchID++ )
@@ -485,12 +515,12 @@ sub PrintRoundTable
 
         my $Position = $InitialTeamCount - $Remaining + 1;
         $OUTPUT .= <<EOT;
-        <tr class=\"TG_MTS_ContentRow${RowColor}\">
-            <td>$Position</td>
-            <td>$Player</td>
-            <td>$ShotTors{$Player} : $GotTors{$Player}</td>
-            <td>$Teams{$Player}</td>
-        </tr>
+<tr class="TG_MTS_ContentRow$RowColor">
+ <td>$Position</td>
+ <td>$Player</td>
+ <td>$ShotTors{$Player} : $GotTors{$Player}</td>
+ <td>$Teams{$Player}</td>
+</tr>
 EOT
         $RowColor = ( $RowColor + 1 ) % 2;
 
@@ -499,7 +529,10 @@ EOT
         delete $GotTors{$Player};
     }
 
-    return $OUTPUT . "</table></div>";
+    return $OUTPUT . <<EOT;
+ </table>
+</div>
+EOT
 }
 
 # Gibt den Tipp des Spielers fuer die jeweilige Runde aus
@@ -513,35 +546,35 @@ sub PrintRoundTipp
     my $MatchID   = 0;
     my $RowColor  = 0;
 
-    my $OUTPUT =
-        "<div align=\"center\">"
-      . PrintHeader("Tipp")
-      . "<table class=\"TG_MTS_Table\"> \
-        <tr id=\"PSSG_Server_HeadRow\">  \
-            <td>Spiel</td> \
-            <td>Ergebnis</td></tr>";
+    my $OUTPUT = <<EOT;
+<div align="center">
+ @{[PrintHeader("Tipp")]}
+ <table class="TG_MTS_Table">
+  <tr id="PSSG_Server_HeadRow">
+   <td>Spiel</td>
+   <td>Ergebnis</td>
+  </tr>
+EOT
 
     for ( $MatchID = $PlayersSetCount ; $MatchID <= $#TD_Table ; $MatchID++ )
     {
         if ( isMatchTyp( $MatchID, $RoundID ) )
         {
             my %gd = %{ $GD_Table[$MatchID] };
-            $OUTPUT .= "<tr class=\"TG_MTS_ContentRow" . $RowColor . "\"> \
-                <td> \
-                <span>"
-              . $gd{FIRST}
-              . "</span> - <span>"
-              . $gd{SECOND}
-              . "</span></td>";
-
-            $OUTPUT .= "<td>" . colourTip($MatchID) . "</td>";
-
-            $OUTPUT .= "</tr>";
+            $OUTPUT .= <<EOT;
+<tr class="TG_MTS_ContentRow$RowColor">
+ <td><span>$gd{FIRST}</span> - <span>$gd{SECOND}</span></td>
+ <td>@{[colourTip($MatchID)]}</td>
+</tr>
+EOT
             $RowColor = ( $RowColor + 1 ) % 2;
         }
     }
 
-    return $OUTPUT . "</table></div>";
+    return $OUTPUT .= <<EOT;
+ </table>
+</div>
+EOT
 }
 
 # Schreibt einen Freiraum
@@ -549,7 +582,9 @@ sub PrintRoundTipp
 # Return: HTML-String
 sub PrintFreeSpace
 {
-    return "<br /><br /><br />";
+    return <<EOT;
+<br /><br /><br />
+EOT
 }
 
 # Schreibt den Titel einer Tabelle
@@ -557,7 +592,9 @@ sub PrintFreeSpace
 # Return: HTML-String
 sub PrintHeader
 {
-    return "<span class=\"TG_MTS_TextTitle\">" . $_[0] . "</span>";
+    return <<EOT;
+<span class="TG_MTS_TextTitle">$_[0]</span>
+EOT
 }
 
 #
@@ -903,9 +940,9 @@ sub colourTip
 
     return <<EOT;
 <span>
-<font style="color:$colour">$gd{FIRST_SCORE}</font>
-:
-<font style="color:$colour">$gd{SECOND_SCORE}</font>
+ <font style="color:$colour">$gd{FIRST_SCORE}</font>
+ :
+ <font style="color:$colour">$gd{SECOND_SCORE}</font>
 </span>
 EOT
 }
