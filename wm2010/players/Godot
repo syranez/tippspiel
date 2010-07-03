@@ -57,8 +57,8 @@
 57;Niederlande;Brasilien;2;0
 58;Uruguay;Ghana;0;1
 59;Argentinien;Deutschland;0;2
-60;Japan;Portugal;2;1
-61;Ghana;Niederland;0;2
-62;Deutschland;Japan;1;2
-63;Ghana;Deutschland;0;3
-64;Niederlande;Japan;0;2
+60;Japan;Portugal;0;3
+61;-;Niederlande;0;3
+62;Deutschland;Spanien;2;1
+63;Uruguay;Spanien;0;3
+64;Niederlande;Deutschland;0;2
