@@ -66,8 +66,8 @@ Spiel 58: Uruguay             versus               Ghana: Tipp: (-:-)
 Spiel 59: Argentinien         versus         Deutschland: Tipp: (-:-)
 Spiel 60: Paraguay            versus             Spanien: Tipp: (-:-)
 # Halbfinale
-Spiel 61: (-)                 versus                 (-): Tipp: (-:-)
-Spiel 62: (-)                 versus                 (-): Tipp: (-:-)
+Spiel 61: Uruguay             versus         Niederlande: Tipp: (-:-)
+Spiel 62: Deutschland         versus             Spanien: Tipp: (-:-)
 # Spiel um Platz Drei
 Spiel 63: (-)                 versus                 (-): Tipp: (-:-)
 # Finale
