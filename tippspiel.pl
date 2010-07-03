@@ -205,11 +205,11 @@ sub PrintNews
  @{[PrintHeader("News")]}
  <table width="90%" style="background-color:#BABADC;border-spacing:2px;text-align:center">
   <tr>
-   <td><p align="left"><b>(29. Juni 2010)</b><span> Das Viertelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href="http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Viertelfinalspiele sind nach dem Kommentar <em>#Viertelfinale</em> zu finden.</p>
+   <td><p align="left"><b>(04. Juli 2010)</b><span> Das Halbfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href="http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Halbfinalspiele sind nach dem Kommentar <em>#Halbfinale</em> zu finden.</p>
    </td>
   </tr>
   <tr>
-   <td><p align="left"><b>(25. Juni 2010)</b><span> Das Achtelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href="http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Achtelfinalspiele sind nach dem Kommentar <em>#Achtelfinale</em> zu finden.</p>
+   <td><p align="left"><b>(29. Juni 2010)</b><span> Das Viertelfinale beginnt! Wer die Begegnungen noch nicht getippt hat, sollte schnell <a href="http://www.minaga-church.de/tippspiel/wm2010/tipTemplate.txt">tipTemplate.txt</a> ausfüllen und an syranez[at]this_domain senden! Die Viertelfinalspiele sind nach dem Kommentar <em>#Viertelfinale</em> zu finden.</p>
    </td>
   </tr>
  </table>
